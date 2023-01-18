@@ -1,0 +1,826 @@
+\documentclass[pmath441]{subfiles}
+
+%% ========================================================
+%% document
+
+\begin{document}
+
+    \section{Algebraic Integers}
+    
+    \subsection{Motivation}
+    
+    At its most elementary, number theory is the study of integers. Few topics:
+    \begin{itemize}
+        \item primes;
+        \item integer equations;
+        \item divisibility;
+        \item gcd; and
+        \item prime factorization.
+    \end{itemize} 
+    The goal is to generalize these topics with \textit{commutative algebra}.
+
+    Naive approach is to use UFD's. A problem with this is that there are many \textit{integer-like} integral domains, such as $\Z\left[ \sqrt{5} \right]$, that are not UFD's.
+
+    Let us do some \textit{random} math and see where it goes. Consider
+    \begin{equation*}
+        \alpha = \frac{1+\sqrt{5}}{2}.
+    \end{equation*}
+    Note that $\alpha\in\Q\left[ \sqrt{5} \right]$. In fact, observe that $\alpha$ is the root of the polynomial $x^{2}-x-1$, so that
+    \begin{equation}
+        \alpha^{2} = \alpha + 1.
+    \end{equation}
+    
+    \begin{definition}{$\Z\left[ \alpha \right]$}
+        Given $\alpha\in\CC$, define
+        \begin{equation*}
+            \Z\left[ \alpha \right] = \left\lbrace f\left( \alpha \right): f\in\Z\left[ x \right] \right\rbrace.
+        \end{equation*}
+    \end{definition}
+
+    For the specific $\alpha = \frac{1+\sqrt{5}}{2}$, observe that [1.1] tells us that we can replace any $\alpha^{2}$ with a linear polynomial in $\alpha$, so that
+    \begin{equation*}
+        \Z\left[ \alpha \right] = \left\lbrace a+b\alpha : a,b\in\Z \right\rbrace.
+    \end{equation*}
+
+    This simplification worked because
+    \begin{equation*}
+        \text{\textit{there is a monic $f\in\Z\left[ x \right]$ such that $f\left( \alpha \right) = 0$}}.
+    \end{equation*}
+    In fact, observe that $\alpha = \frac{1+\sqrt{5}}{2}$ implies that
+    \begin{equation*}
+        \left( 2\alpha-1 \right)^{2} = 5,
+    \end{equation*}
+    which means if we have any other number \textit{congruent to $5$ mod $4$} in place of $5$, we would still get a polynomial of the form
+    \begin{equation*}
+        4\alpha^{2}-4\alpha-b = 0,
+    \end{equation*}
+    where $b\equiv 0\mod 4$.
+
+    The last thing we note about $\Z\left[ \alpha \right]$ is that
+    \begin{equation*}
+        \Z\left[ \alpha \right] = \Z+\Z\alpha.
+    \end{equation*}
+    In general, we want to have
+    \begin{equation*}
+        \Z\left[ \alpha \right] = \Z+\Z\alpha+\cdots+\Z\alpha^{n-1}
+    \end{equation*}
+    which allows us to do \textit{$\Z$-module theory}.
+
+    \subsection{Algebraic Integers}
+
+    \begin{definition}{\textbf{Algebraic Integer}}
+        We say $\alpha\in\CC$ is an \emph{algebraic integer} if and only if there exists a monic $f\in\Z\left[ x \right]$ such that
+        \begin{equation*}
+            f\left( \alpha \right) = 0.
+        \end{equation*}
+    \end{definition}
+
+    We do not insist that $f$ is irreducible. For instance, $7, \sqrt{5}, \frac{1+\sqrt{5}}{2}, i, 1+i, \zeta_n$ are all algebraic integers, where $\zeta_n$ is an $n$th root of unity.
+
+    How do we tell if an \textit{algebraic number} $\alpha\in\CC$ (i.e. $\alpha$ is a root of a not-necessarily monic polynomial over $\Z$) is an algebraic integer?
+    
+    \begin{theorem}{}
+        An algebraic number $\alpha\in\CC$ is an algebraic integer if and only if its minimal polynomial over $\Q$ is over $\Z$.
+    \end{theorem}
+
+    \placeqed[Postponed]
+
+    \begin{cor}{}
+        The only algebraic integers in $\Q$ are integers.
+    \end{cor}	
+
+    \rruleline
+
+    \begin{example}{}
+        Consider
+        \begin{equation*}
+            \beta = \frac{1+\sqrt{3}}{2}.
+        \end{equation*}
+        Then $\left( 2\beta-1 \right)^{2}=3$, so that $\beta$ is a root for
+        \begin{equation*}
+            f = x^{2}-x-\frac{1}{2}.
+        \end{equation*}
+        But $f$ is a monic polynomial with $\deg\left( f \right)=2$ and a root $\beta$ of $f$ is irrational, it follows that $f$ is the minimal polynomial for $\beta$ over $\Q$. Thus $\beta$ is not an algebraic integer.
+    \end{example}
+
+    \rruleline
+
+    \np Suppose that
+    \begin{equation*}
+        f = \sum^{n}_{j=0} a_jx^j\in\Z\left[ x \right].
+    \end{equation*}
+    Then the \emph{content} of $f$ is
+    \begin{equation*}
+        \text{content}\left( f \right) = \gcd\left( a_0,\ldots,a_n \right)
+    \end{equation*}
+    and we say that
+    \begin{equation*}
+        \text{$f$ is \emph{primitive}} \iff \text{content}\left( f \right) = 1.
+    \end{equation*}
+    In this setting, Gauss's lemma can be stated as following.
+
+    \begin{lemma}{Gauss's Lemma}
+        Let $f,g\in\Z\left[ x \right]$. If $f,g$ are primitive, then so is $fg$.
+    \end{lemma}
+
+    \rruleline
+
+    \begin{boxyproof}{Proof of Theorem 1.1}
+        ($\impliedby$) This direction is trivial, as any minimal polynomial is monic.
+
+        ($\implies$) Let $\alpha\in\CC$ be an algebraic integer and let $m\in\Q\left[ x \right]$ be its minimal polynomial. Let $f\in\Z\left[ x \right]$ be monic such that $f\left( \alpha \right) = 0$. Since $m$ is the minimal polynomial,
+        \begin{equation*}
+            f = mg
+        \end{equation*}
+        for some $g\in\Q\left[ x \right]$. 
+
+        Take $N_1,N_2\in\N$ be the smallest positive integers such that $N_1m, N_2g\in\Z\left[ x \right]$. If $p\in\N$ is a prime dividing all coefficients of $N_1m$, then $\frac{N_1}{p}m\in\Z\left[ x \right]$. In fact, $\frac{N_1}{p}\in\Z$, since $m$ is monic so that the leading coefficient of $N_1m$ is $N_1$. This leads to a contradiction, as $\frac{N_1}{p} < N_1$ violates minimality of $N_1$.
+
+        Also note that $f,m$ are monic, so that $g$ is monic as well. Hence by following a similar argument, $N_2g$ is primitive.
+
+        Now,
+        \begin{equation*}
+            N_1N_2f = \left( N_1m \right)\left( N_2g \right)
+        \end{equation*}
+        Since $f$ is monic, observe that the content of $N_1N_2f$ is $N_1N_2$. But $N_1m, N_2g$ are primitive, so by Gauss's lemma, $\left( N_1m \right)\left( N_2g \right)$ is primitive. Therefore
+        \begin{equation*}
+            N_1N_2 = \text{content}\left( N_1N_2f \right) = \text{content}\left( \left( N_1m \right)\left( N_2g \right) \right) = 1,
+        \end{equation*}
+        which means $N_1=N_2=1$. Thus $m\in\Z\left[ x \right]$.
+    \end{boxyproof}
+
+    \subsection{Ring of Integers}
+    
+    \begin{example}{}
+        Let $d\in\Z$ be \emph{square-free} and $d\neq 1$. That is, in the prime factorization of $d$, there are no multiplicities. Consider
+        \begin{equation*}
+            K = \Q\left( \sqrt{d} \right) = \left\lbrace a+b\sqrt{d}: a,b\in\Q \right\rbrace.
+        \end{equation*}
+        Then we know that
+        \begin{equation*}
+            K /\Q\text{ is finite}\implies K /\Q\text{ is algebraic}.
+        \end{equation*}
+
+        We are going to find all algebraic integers in $K$. Let
+        \begin{equation*}
+            \alpha = a+b\sqrt{d}\in K
+        \end{equation*}
+        be an algebraic integer. Consider the conjugate
+        \begin{equation*}
+            \overline{\alpha} = a-b\sqrt{d}.
+        \end{equation*}
+        Then
+        \begin{equation*}
+            m = \left( x-\alpha \right)\left( x-\overline{\alpha} \right) = x^{2}-2ax+a^{2}-db^{2}
+        \end{equation*}
+        is the minimal polynomial for $\alpha$ over $\Q$. By Theorem 1.1, it follows that $2a,a^{2}-db^{2}\in\Z$. Now,
+        \begin{equation*}
+            4\left( a^{2}-db^{2} \right) = \left( 2a \right)^{2} - d\left( 2b \right)^{2}
+        \end{equation*}
+        but $a^{2}-db^{2}, \left( 2a \right)^{2}\in\Z$, so that
+        \begin{equation*}
+            d\left( 2b \right)^{2}\in\Z.
+        \end{equation*}
+        Since $d$ is square-free, it follows that $2b\in\Z$. If not, then the denominator of $2b$ is not $1$. This means the denominator of $\left( 2b \right)^{2}$ has a square of a prime as a factor, which contradicts the fact that $d$ is square-free. Hence $\gamma = 2a, \delta = 2b\in\Z$. This means
+        \begin{equation*}
+            a^{2}-db^{2} = \left( \frac{\gamma}{2} \right)^{2} - d\left( \frac{\delta}{2} \right)^{2} = \frac{\gamma^{2}-d\delta^{2}}{4}\in\Z.
+        \end{equation*}
+        It follows $\gamma^{2}-d\delta^{2} \equiv 0 \mod 4$.
+
+        We have few cases.
+
+        \begin{case}
+            $d\equiv 1\mod 4$.
+
+            It follows that
+            \begin{equation*}
+                \gamma^{2} \equiv \delta^{2} \mod 4.
+            \end{equation*}
+            But even numbers square to $0$ mod $4$ and odd numbers square to $1$ mod $4$. Hence
+            \begin{equation*}
+                \gamma \equiv \delta \mod 2.
+            \end{equation*}
+            It follows that $\alpha$ is of the form
+            \begin{equation*}
+                \alpha = a+b\sqrt{d} = \frac{\gamma+\delta\sqrt{d}}{2}
+            \end{equation*}
+            for some $\gamma,\delta\in\Z$.
+        \end{case}
+
+        \begin{case}
+            $d\equiv 2\mod 4$ or $d\equiv 3\mod 4$.
+
+            It is a routine exercise to show that
+            \begin{equation*}
+                \gamma^{2}-d\delta^{2} \equiv 0 \mod 4 \iff \gamma \equiv \delta \equiv 0 \mod 2.
+            \end{equation*}
+            Hence
+            \begin{equation*}
+                \alpha = \frac{\gamma}{2} + \frac{\delta}{2} \sqrt{d}
+            \end{equation*}
+            but $\gamma,\delta$ are even numbers, so that $a=\frac{\gamma}{2},b=\frac{\delta}{2}\in\Z$ and
+            \begin{equation*}
+                \alpha = a+b\sqrt{d}.
+            \end{equation*}
+        \end{case}
+
+        Exercise: check these conditions are also sufficient.
+    \end{example}
+
+    \rruleline
+    
+    \np The above example gives the following idea.
+    \begin{equation*}
+        \text{\textit{Given a finite extension $K /\Q$, we find all algebraic integers in $K$.}}
+    \end{equation*}
+    This motivates the following definitions.
+
+    \begin{definition}{\textbf{Number Field}, \textbf{Ring of Integers} of a Number Field}
+        We call a finite extension $K$ of $\Q$ a \emph{number field}.
+
+        Given a number field $K$, we call
+        \begin{equation*}
+            \mO_K = \left\lbrace \alpha\in K: \alpha \text{ is an algebraic integer} \right\rbrace
+        \end{equation*}
+        the \emph{ring of integers} of $K$.
+    \end{definition}
+    
+    \np We are going to prive that $\mO_K$ is a ring.\footnote{We are going to assume that every ring is unital and commutative throughout, if not stated otherwise.} To do so, we first show
+    \begin{equation*}
+        \A = \left\lbrace z\in\CC: z\text{ is an algebraic integer} \right\rbrace
+    \end{equation*}
+    is a ring, so that
+    \begin{equation*}
+        \mO_K = \A\cap K
+    \end{equation*}
+    is also a ring.
+    
+    \np Recall that, given $\alpha\in\A$, we have
+    \begin{equation*}
+        \Z\left[ \alpha \right] = \Z + \Z\alpha + \cdots + \Z\alpha^{n-1}.
+    \end{equation*}
+    This allows us to do module theory over $\Z$.
+
+    \begin{definition}{\textbf{$R$-module}}
+        Let $R$ be a ring. An \emph{$R$-module} is an abelian group $\left( M,+ \right)$ with a left $R$-action on $M$ such that
+        \begin{enumerate}
+            \item $1m = m$ for $m\in M$;
+            \item $\left( r_1+r_2 \right)m = r_1m+r_2m$ for $r_1,r_2\in R, m\in M$;
+            \item $r\left( m_1+m_2 \right) = rm_1+rm_2$ for $r\in R, m_1,m_2\in M$; and
+            \item $\left( r_1r_2 \right)m = r_1\left( r_2m \right)$ for $r_1,r_2\in R, m\in M$.
+        \end{enumerate}
+    \end{definition}
+
+    \clearpage
+    
+    \begin{example}{Examples of $R$-modules}
+        Given a ring $R$, $R$ is an $R$-module with left action
+        \begin{equation*}
+            r\cdot m = rm, \hspace{2cm}\forall r,m\in R.
+        \end{equation*}
+        In fact, given any subring $S\subseteq\R$, $R$ is an $S$-module with
+        \begin{equation*}
+            s\cdot r = sr, \hspace{2cm}\forall s\in S, r\in R.
+        \end{equation*}
+        Similar to $\R^n$ which is a $\R$-vector space, $R^n$ is an $R$-module with
+        \begin{equation*}
+            r\begin{bmatrix} x_1 \\ \vdots \\ x_n \end{bmatrix} = \begin{bmatrix} rx_1 \\ \vdots \\ rx_n \end{bmatrix}, \hspace{2cm}\forall r\in R, \begin{bmatrix} x_1 \\ \vdots \\ x_n \end{bmatrix}\in R^n.
+        \end{equation*}
+    \end{example}
+
+    \rruleline
+
+    \begin{example}{}
+        Consider $R=\Z$ and consider an $R$-module $M$. Then given $n\in\N,m\in M$,
+        \begin{equation*}
+            n\cdot m = \left( 1+\cdots+1 \right)\cdot m = 1\cdot m + \cdots + 1\cdot m = m + \cdot + m = nm.
+        \end{equation*}
+        That is, the $\Z$-module on an abelian group $M$ \textit{does not impose any additional structure on $M$}; a $\Z$-module is simply an abelian group.
+
+        As an exercise, we can also check that
+        \begin{equation*}
+            \left( -n \right)\cdot m = -nm
+        \end{equation*}
+        for $n\in\N, m\in M$.
+    \end{example}
+
+    \rruleline
+    
+    \begin{definition}{\textbf{$R$-submodule}, \textbf{Homomorphism} of $R$-modules, \textbf{Finitely Generated} $R$-module}
+        Let $R$ be a ring and let $M$ be an $R$-module. We say $N\subseteq M$ is an $R$-submodule of $M$ if $N$ is an $R$-module using the same operations as $M$.
+
+        Given $R$-modules $M,N$, we say $f:M\to N$ is a \emph{homomorphism} if and only if
+        \begin{equation*}
+            f\left( rm_1+m_2 \right) = rf\left( m_1 \right) + f\left( m_2 \right), \hspace{2cm}\forall r\in R, m_1,m_2\in M.
+        \end{equation*}
+        In case $f$ is bijective, we say $f$ is an \emph{isomorphism}.
+
+        We say an $R$-module is \emph{finitely generated} if there are $m_1,\ldots,m_n\in M$ such that
+        \begin{equation*}
+            M = Rm_1 + \cdots + Rm_n.
+        \end{equation*}
+        That is, for any $m\in M$, there exists $r_1,\ldots,r_n\in R$ such that
+        \begin{equation*}
+            m = \sum^{n}_{j=1}r_jm_j.
+        \end{equation*}
+        In other words, finite number of elements $m_1,\ldots,m_n$ \emph{generate} $M$.
+    \end{definition}
+
+    \np Observe that
+    \begin{equation*}
+        \text{$N\subseteq M$ is an $R$-submodule} \iff \text{$N$ is subgroup of $M$ closed under $R$-left action}.
+    \end{equation*}
+    
+    \begin{example}{}
+        Given a ring $R$, as an $R$-module, the only $R$-submodules are the ideals of $R$.
+    \end{example}
+
+    \rruleline
+
+    \begin{definition}{\textbf{Integral} over $R$}
+        Let $R,S$ be integral domains, such that $R$ is a subring of $S$. We say $\alpha\in S$ is \emph{integral} over $R$ if there is monic $f\in R\left[ x \right]$ such that $f\left( \alpha \right) = 0$.
+    \end{definition}
+
+    \begin{example}{}
+        In case $R=\Z, S=\CC$, given $\alpha\in S$,
+        \begin{equation*}
+            \text{$\alpha$ is integral} \iff \text{$\alpha$ is algebraic integer}.
+        \end{equation*}
+        That is, being integral over $R$ is a generalization of being an algebraic integer.
+    \end{example}
+
+    \rruleline
+    
+    \begin{theorem}{}
+        Let $R,S$ be integral domains where $R$ is a subring of $S$ and let $\alpha\in S$. Then
+        \begin{equation*}
+            \text{$\alpha$ is integral over $R$} \iff R\left[ \alpha \right] = \left\lbrace f\left( \alpha \right):f\in R\left[ x \right] \right\rbrace \text{ is a finitely generated $R$-module}.
+        \end{equation*}
+    \end{theorem}
+    
+    \begin{proof}
+        ($\implies$) Suppose $\alpha$ is integral over $R$. Then there is a polynomial relation
+        \begin{equation*}
+            \alpha^n + a_{n-1}\alpha^{n-1} + \cdots + a_1\alpha + a_0 = 0
+        \end{equation*}
+        for some $a_0,\ldots,a_{n-1}\in R$. Rearranging for $\alpha^n$,
+        \begin{equation*}
+            \alpha^n = - \left( a_{n-1}\alpha^{n-1} + \cdots + a_1\alpha + a_0 \right).
+        \end{equation*}
+        This means, given any $f\in R\left[ x \right]$, every powers $\alpha^n,\alpha^{n+1},\ldots$ in $f\left( \alpha \right)$ can be replaced by lower powers of $\alpha$, so that
+        \begin{equation*}
+            f\left( \alpha \right) = g\left( \alpha \right)
+        \end{equation*}
+        for some $g\in R\left[ x \right]$ with $\deg\left( g \right) \leq n-1$. That is,
+        \begin{equation*}
+            R\left[ \alpha \right]\subseteq R+R\alpha+\cdots+R\alpha^{n-1}.
+        \end{equation*}
+        But the reverse containment is trivial, so that $R\left[ \alpha \right]$ is finitely generated.
+
+        ($\impliedby$) Suppose $R\left[ \alpha \right]$ is finitely generated, say
+        \begin{equation*}
+            R\left[ \alpha \right] = Rf_1\left( \alpha \right) + \cdots + Rf_n\left( \alpha \right)
+        \end{equation*}
+        with $f_1,\ldots,f_n\in R\left[ x \right]$. Take $N = \max_{1\leq j\leq n} \deg\left( f_j \right)$. Then $\alpha^{N+1}\in R\left[ x \right]$ as a polynomial of $\alpha$, so that
+        \begin{equation*}
+            \alpha^{N+1} = \sum^{n}_{j=1} r_jf_j\left( \alpha \right)
+        \end{equation*}
+        for some $r_1,\ldots,r_n\in R$. 
+
+        Now consider
+        \begin{equation*}
+            g = x^{N+1} - \sum^{n}_{j=1}r_jf_j \in R\left[ x \right].
+        \end{equation*}
+        Then $g\left( \alpha \right) = 0$. But $\deg\left( x^{N+1} \right) = N+1 > N = \max_{1\leq j\leq n} \deg\left( f_j \right)$, so that $g$ is monic as well. Thus $\alpha$ is algebraic over $R$.
+    \end{proof}
+    
+    \np The big idea for Theorem 1.3 is that
+    \begin{equation*}
+        \text{\textit{showing $\Z\left[ \alpha \right]$ is finitely generated is often \textbf{easier} than finding monic $f\in\Z\left[ x \right]$ with $f\left( \alpha \right) = 0$.}}
+    \end{equation*}
+    "Let's work with generators instead of polynomials" - Blake.
+    
+    \begin{theorem}{}
+        Let
+        \begin{equation*}
+            \A = \left\lbrace z\in\CC: z\text{ is an algebraic integer} \right\rbrace.
+        \end{equation*}
+        Then $\A$ is a subring of $\CC$.
+    \end{theorem}
+
+    \begin{proof}[Proof Attempt]
+        If we are in PMATH 348, proving something is \textit{easy}; we simply apply the subring test. Let's see how it fails here.
+
+        Let $\alpha,\beta\in\A$. We must show that $\alpha-\beta, \alpha\beta\in\A$. That is, we must show
+        \begin{equation*}
+            \Z\left[ \alpha-\beta \right],\Z\left[ \alpha\beta \right]\text{ are finitely generated $\Z$-modules}.
+        \end{equation*}
+        Since $\alpha,\beta$ are algebraic integers, write
+        \begin{equation*}
+            \Z\left[ \alpha \right] = \sum^{n}_{j=1} \Z\alpha_j, \hspace{0.5cm} \Z\left[ \beta \right] = \sum^{m}_{j=1} \Z\beta_j.
+        \end{equation*}
+        Therefore,
+        \begin{equation*}
+            \Z\left[ \alpha,\beta \right] = \left\lbrace f\left( \alpha,\beta \right): \Z\left[ x,y \right] \right\rbrace
+        \end{equation*}
+        is also finitely generated. In fact, it is generated by $\left\lbrace \alpha_i\beta_j \right\rbrace^{}_{1\leq i\leq n, 1\leq j\leq m}$. Hence $\Z\left[ \alpha,\beta \right]$ is finitely generated as a $\Z$-module.
+
+        We have that $\Z\left[ \alpha-\beta \right], \Z\left[ \alpha\beta \right]$ are $\Z$-submodules of the $fg$ module $\Z\left[ \alpha,\beta \right]$.
+
+        Now, if we use the intuition from linear algebra, we should be done here. Recall that subspaces of a finite-dimensional vector space are finite-dimensional. But this is not the case for modules!
+
+        \placeqed[Proof Failed]
+    \end{proof}
+
+    \begin{example}{Submodule of a Finitely Generated Module That Is Not Finitely Generated}
+        Consider
+        \begin{equation*}
+            R = \left[ x_1,x_2,\ldots \right].
+        \end{equation*}
+        Then $R$ is a finitely generated $R$-module (i.e. $R = R 1$). But observe that
+        \begin{equation*}
+            I = \left< x_1,x_2,\ldots \right> 
+        \end{equation*}
+        is not finitely generated. 
+
+        To see this, observe that elements of $R$ are polynomials in $x_1,x_2,\ldots$, which has \textit{only finitely many indeterminates}. So having finitely many polynomials does not give enough number of indeterminates to generate $I$.
+    \end{example}
+
+    \rruleline
+
+    \np To resolve this issue, we consider the following definition.
+    
+    \begin{definition}{\textbf{Noetherian} Ring}
+        Let $R$ be a ring. We say $R$ is \emph{Noetherian} if every $R$-submodule (i.e. ideal) of $R$ is finitely generated.
+    \end{definition}
+
+    \begin{example}{}
+        Observe that $\Z$ is Noetherian, as it is a PID (i.e. every ideal of $\Z$ is generated by \textit{an} element).
+    \end{example}
+
+    \rruleline
+
+    \begin{theorem}{}
+        Let $R$ be a Noetherian ring and let $M$ be a finitely generated $R$-module. Then every $R$-submodule of $M$ is finitely generated.
+    \end{theorem}
+
+    \rruleline
+
+    \np Theorem 1.5 resolves the issue we left in Theorem 1.4, since $\Z$ is Noetherian.
+
+    \np Let us reduce Theorem 1.5 a bit. Consider a finitely generated $R$-module
+    \begin{equation*}
+        M = R\alpha_1 + \cdots + R\alpha_n
+    \end{equation*}
+    and an epimorphism of $R$-modules
+    \begin{equation*}
+        \begin{aligned}
+            f:R^n & \to M \\
+            \left( r_1,\ldots,r_n \right) & \mapsto r_1\alpha_1 + \cdots + r_n\alpha_n
+        \end{aligned} .
+    \end{equation*}
+    That is, every finitely generated $R$-module can be viewed as an $R$-submodule of $R^n$.
+
+    Moreover, for any $R$-submodule $N\subseteq M$,
+    \begin{equation*}
+        f^{-1}\left( N \right)\subseteq R^n.
+    \end{equation*}
+    If $f^{-1}\left( N \right) = R\beta_1 + \cdots + R\beta_m$, then
+    \begin{equation*}
+        N = Rf\left( \beta_1 \right) + \cdots + Rf\left( \beta_m \right).
+    \end{equation*}
+    Hence it remains to show that every $R$-submodule $N$ of $M$ satisfy $f^{-1}\left( N \right) = R\beta_1+\cdots+R\beta_m$ for some $\beta_1,\ldots,\beta_m\in R$.
+
+    \begin{boxyproof}{Proof of Theorem 1.5}
+        We may assume $M=R^n$. If $n=1$, then $R$ is Noetherian and we are done.
+
+        Suppose that the result holds for some $n\geq 1$ and consider $M = R^{n+1}$. Consider the epimorphism
+        \begin{equation*}
+            \begin{aligned}
+                \pi:R^{n+1}&\to R \\
+                \left( r_1,\ldots,r_{n+1} \right) & \mapsto r_{n+1}
+            \end{aligned} .
+        \end{equation*}
+        Let $N$ be an $R$-submodule of $M$. Consider
+        \begin{equation*}
+            N_1 = \left\lbrace \left( r_1,\ldots,r_{n+1} \right)\in N: r_{n+1} = 0 \right\rbrace
+        \end{equation*}
+        which is isomorphic to an $R$-submodule of $R^n$. Hence by inductive hypothesis, $N_1$ is finitely generated. Moreover,
+        \begin{equation*}
+            N_2 = \pi\left( N \right)
+        \end{equation*}
+        is an $R$-submodule of $R$, so is finitely generated (by inductive hypothesis).
+
+        Say
+        \begin{equation*}
+            \begin{aligned}
+                N_1 & = Rx_1 + \cdots + Rx_p \\
+                N_2 & = R\pi\left( y_1 \right) + \cdots + R\pi\left( y_q \right)
+            \end{aligned} 
+        \end{equation*}
+        for some $x_1,\ldots,x_p,y_1,\ldots,y_q\in R$. Let $x\in N$. Then
+        \begin{equation*}
+            \pi\left( x \right) = r_1\pi\left( y_1 \right) + \cdots + r_q\pi\left( y_q \right)
+        \end{equation*}
+        for some $r_1,\ldots,r_q\in R$. But $\pi$ is a homomorphism of $R$-modules, so that
+        \begin{equation*}
+            \pi\left( x - \sum^{q}_{j=1} r_jy_j \right) = 0.
+        \end{equation*}
+        This means the $\left( n+1 \right)$th entry of $x-\sum^{q}_{j=1}r_jy_j$ is $0$, so that $x-\sum^{q}_{j=1}r_jy_j\in N_1$. That is,
+        \begin{equation*}
+            x - \sum^{q}_{j=1}r_jy_j = \sum^{p}_{k=1} s_kx_k
+        \end{equation*}
+        for some $s_1,\ldots,s_p\in R$.
+
+        Thus
+        \begin{equation*}
+            x = \sum^{q}_{j=1}r_jy_j + \sum^{p}_{k=1} s_kx_k,
+        \end{equation*}
+        so that
+        \begin{equation*}
+            N = \sum^{q}_{j=1}Ry_j + \sum^{p}_{k=1} Rx_k,
+        \end{equation*}
+        as required.
+    \end{boxyproof}
+    
+    \subsection{Additive Structure}
+
+    So far, it has been very useful to consider $\mO_K$ as a $\Z$-module. Let us investigate this $\Z$-module as an abelian group
+    \begin{equation*}
+        \left( \mO_K,+ \right)
+    \end{equation*}
+    \textit{without multiplication structure}, where $K$ is a number ring (i.e. $\left[ K:\Q \right]<\infty$).
+
+    The next definition will make it clear the kind of \textit{linear algebraic} approach we are going to take.
+
+    \begin{definition}{\textbf{Linearly Independent} Subset of an $R$-module, \textbf{Basis} for an $R$-module, \textbf{Free} $R$-module}
+        Let $R$ be a ring and let $M$ be an $R$-module. Let $B\subseteq M$.
+        \begin{enumerate}
+            \item Say $B$ is \emph{linearly independent} if and only if for all $m_1,\ldots,m_n\in B, r_1,\ldots,r_n\in R$,
+                \begin{equation*}
+                    r_1m_1 + \cdots + r_nm_n = 0 \implies r_1 = \cdots = r_n = 0.
+                \end{equation*}
+            \item Say $B$ \emph{spans} $M$ if for all $x\in M$, there are $b_1,\ldots,b_n\in B, r_1,\ldots,r_n\in R$ such that
+                \begin{equation*}
+                    x = r_1b_1 + \cdots + r_nb_n.
+                \end{equation*}
+            \item Say $B$ is a \emph{basis} for $M$ if $B$ is linearly independent and spans $M$. In case $M$ admits a basis, we call it a \emph{free} $R$-module.
+        \end{enumerate}
+    \end{definition}
+
+    \np In case there is a basis $B$ for $M$, the size of any other basis for $M$ is $\left| B \right|$.
+
+    \begin{definition}{\textbf{Rank} of a Free $R$-module}
+        Let $R$ be a ring and let $M$ be a free $R$-module. Then the size of a basis for $M$ is called the \emph{rank} of $M$, denoted as $\rank\left( M \right)$.
+    \end{definition}
+    
+    \begin{prop}{}
+        Let $R$ be a ring and let $M$ be an $R$-module. Let $B\subseteq M$. Then
+        \begin{equation*}
+            \text{$B$ is a basis} \iff \text{every $x\in M$ can be uniquely written as an $R$-linear combination of elements of $B$}.
+        \end{equation*}
+        In particular,
+        \begin{equation*}
+            \text{$M$ is free with }\rank\left( M \right) = n < \infty \iff M\iso R^n \text{ by } \left( r_1,\ldots,r_n \right)\leftrightarrow r_1b_1+\cdots+r_nb_n \text{ for some $b_1,\ldots,b_n\in M$},
+        \end{equation*}
+        in which case $\left\lbrace b_1,\ldots,b_n \right\rbrace$ is a basis for $M$.
+    \end{prop}
+
+    \rruleline
+
+    \begin{example}{Free but not Finitely Generated}
+        Consider $R=\Z,M=\Z\left[ x \right],B=\left\lbrace 1,x,x_2,\ldots \right\rbrace$. Then $M$ is a free module generated by $B$ but is not finitely generated.
+    \end{example}
+
+    \rruleline
+    
+    \begin{example}{Finitely Generated but not Free}
+        Consider $R=\Z, M=\Z_2$. Then $2\cdot 1 =0$ but $2\neq 0$ in $R$. So the only $R$-linearly independent subset of $M$ is the emptyset $\emptyset$, so that $M$ is fintely generated but not free.
+    \end{example}
+
+    \rruleline
+    
+    \begin{example}{}
+        Consider $R=\Z, M=\Z\times\Z, N=\Z\times 2\Z$. Then $M$ is free with a basis
+        \begin{equation*}
+            B_1 = \left\lbrace \left( 1,0 \right),\left( 0,1 \right) \right\rbrace,
+        \end{equation*}
+        so that $\rank\left( M \right) = 2$. Also, $N$ is free with a basis
+        \begin{equation*}
+            B_2 = \left\lbrace \left( 1,0 \right),\left( 0,2 \right) \right\rbrace,
+        \end{equation*}
+        so that $\rank\left( N \right) = 2$. However, observe that $B_2$ is an $R$-linearly independent subset of $M$ with $\rank\left( M \right)$ elements!
+
+        This particular example shows that it is possible for modules of rank $n$ to have a linearly independent subset of $n$ elements which does not span the whole module, unlike the case in linear algebra.
+    \end{example}
+
+    \rruleline
+
+    \clearpage
+    
+    \np We are going to present two facts without proof. Fix a PID $R$ and a free $R$-module $M$ with $\rank\left( M \right) = n<\infty$.
+
+    \begin{fact}{}
+        For an $R$-submodule $N\subseteq M$, $N$ is free with $\rank\left( N \right)\leq n$.
+    \end{fact}
+
+    \begin{fact}{}
+        Any maximal linearly independent subset of $M$ has $n$ elements.
+    \end{fact}
+
+    \np The next goal is to show that ring of integers is a free module. That is, given a number field $K$ with $\left[ K:\Q \right] = n$, our goal is 
+    \begin{equation*}
+        \text{\textit{to find an embedding (i.e. monomorphism) $\phi:\mO_K\to\Z^n$ such that $\rank\left( \phi\left( \mO_K \right) \right) = n$.}}
+    \end{equation*}
+    This will tell us $\mO_k\iso\Z^n$ as $\Z$-modules. In particular, $\left( \mO_K,+ \right)$ is a free module with rank $n$.
+    
+    \begin{definition}{\textbf{Integral Basis}}
+        Given a free $\Z$-module $M$, a basis for $M$ is called an \emph{integral basis}.
+    \end{definition}
+
+    \np We introduce two useful tools in algebraic number theory.
+
+    \begin{definition}{\textbf{Trace}, \textbf{Norm} of an Element of a Number Field}
+        Let $K$ be a number field with $\left[ K:\Q \right]=n<\infty$. Let $\alpha\in K$ and consider
+        \begin{equation*}
+            \begin{aligned}
+                T_{\alpha}:K&\to K \\
+                x&\mapsto \alpha x
+            \end{aligned} ,
+        \end{equation*}
+        which is a $\Q$-linear operator.
+        \begin{enumerate}
+            \item The \emph{trace} of $\alpha$ relative to $K /\Q$, denoted as $\tr_{K /\Q}\left( \alpha \right)$, is
+                \begin{equation*}
+                    \tr_{K /\Q}\left( \alpha \right) = \tr\left( T_{\alpha} \right).
+                \end{equation*}
+            \item The \emph{norm} of $\alpha$ relative to $K /\Q$, denoted as $N_{K /\Q}\left( \alpha \right)$, is
+                \begin{equation*}
+                    N_{K /\Q}\left( \alpha \right) = \det\left( T_{\alpha} \right).
+                \end{equation*}
+        \end{enumerate}
+    \end{definition}
+    
+    \np Note that $\tr_{K /\Q}\left( \alpha \right), N_{K /\Q}\left( \alpha \right)\in\Q$, since $T_{\alpha}$ is a $\Q$-linear operator (hence the entries of any matrix representation of $T_{\alpha}$ are rational).
+
+    \np Let $\alpha\in K$. Let $\beta$ be a $\Q$-basis for $K$ and let $A = \left[ T_{\alpha} \right]_{\beta}$. Consider the characteristic and minimal polynomials $f,p\in\Q\left[ x \right]$, respectively, of $A$. Notice that, for $g\in\Q\left[ x \right]$ and $v\in K$,
+    \begin{equation*}
+        g\left( T_{\alpha} \right)v = g\left( \alpha \right)v,
+    \end{equation*}
+    since $T_{\alpha}^mv = \alpha^mv$ for $m\in\N\cup\left\lbrace 0 \right\rbrace$. In particular,
+    \begin{equation*}
+        g\left( \alpha \right) = 0 \iff g\left( T_{\alpha} \right) = 0,
+    \end{equation*}
+    so that $p$ is the minimal polynomial for $\alpha$ over $\Q$. By the Cayley-Hamilton theorem, $p|f$. However,
+    \begin{equation*}
+        \deg\left( f \right) = \left[ K:\Q \right] = n.
+    \end{equation*}
+    We consider the following particular case.
+
+    \clearpage
+
+    \begin{case}
+        \textit{Suppose}
+        \begin{equation*}
+            K = \Q\left( \alpha \right).
+        \end{equation*}
+        On the other hand, since $p$ is the minimal polynomial of $\alpha$,
+        \begin{equation*}
+            \deg\left( p \right) = \left[ \Q\left( \alpha \right):\Q \right] = \left[ K:\Q \right] = n.
+        \end{equation*}
+        Hence $p|f$, $\deg\left( f \right) = \deg\left( p \right)$, and $f,p$ are monic, so that $f=p$.
+
+        Let $\alpha = \alpha_1, \alpha_2, \ldots, \alpha_n$ be the conjugates of $\alpha$ (i.e. the roots of $p$ in $\CC$). But the roots of the characteristic polynomial of an operator are the eigenvalues (with multiplicity) and $f=p$, so that
+        \begin{equation*}
+            \tr_{K /\Q}\left( \alpha \right) = \tr\left( T_{\alpha} \right) = \sum^{n}_{j=1} \alpha_j
+        \end{equation*}
+        and
+        \begin{equation*}
+            N_{K /\Q}\left( \alpha \right) = \det\left( T_{\alpha} \right) = \prod^{n}_{j=1} \alpha_j.
+        \end{equation*}
+
+        Also note that
+        \begin{equation*}
+            \sum^{n}_{j=1} \alpha_j = -\left[ x^{n-1} \right]p 
+        \end{equation*}
+        and
+        \begin{equation*}
+            \left( -1 \right)\left[ x^0 \right]p = \left( -1 \right)^np\left( 0 \right).
+        \end{equation*}
+
+        Recall from the field theory that the embeddings of $K=\Q\left( \alpha \right)$ in $\CC$ are exactly given by $\sigma_j\left( \alpha \right) = \alpha_j$ for $j\in\left\lbrace 1,\ldots,n \right\rbrace$. That is,
+        \begin{equation*}
+            \tr_{K /\Q}\left( \alpha \right) = \sum^{n}_{j=1}\alpha_j = \sum^{n}_{j=1} \sigma_j\left( \alpha \right)
+        \end{equation*}
+        and
+        \begin{equation*}
+            N_{K /\Q}\left( \alpha \right) = \prod^{n}_{j=1}\alpha_j = \sum^{n}_{j=1}\sigma_j\left( \alpha \right).
+        \end{equation*}
+    \end{case}
+    
+    \np Apart from Case 1, we want to compute $\tr_{K /\Q}\left( \alpha \right), N_{K /\Q}\left( \alpha \right)$ \textit{in general}. To do so, we introduce the following lemma with a technical proof.
+
+    \begin{lemma}{}
+        Suppose that $K$ is a number field with $\left[ K:\Q \right] = n$ and let $\alpha\in K$ with $\left[ K:\Q\left( \alpha \right) \right] = m$. Consider
+        \begin{equation*}
+            \begin{aligned}
+                T_{\alpha}:K&\to K \\
+                x & \mapsto \alpha x
+            \end{aligned} .
+        \end{equation*}
+        Let $f\in\Q\left[ x \right]$ be the characteristic polynomial of $T_{\alpha}$ and let $p\in\Q\left[ x \right]$ be the minimal polynomial for $\alpha$. Then
+        \begin{equation*}
+            f = p^m.
+        \end{equation*}
+    \end{lemma}
+
+    \np Note that we recover Case 1 when $m=1$ (i.e. $K=\Q\left( \alpha \right)$).
+    
+    \begin{proof}
+        Let
+        \begin{equation*}
+            \beta = \left\lbrace y_1,\ldots,y_d \right\rbrace
+        \end{equation*}
+        be a $\Q$-basis for $\Q\left( \alpha \right)$ and let
+        \begin{equation*}
+            \beta' = \left\lbrace z_1,\ldots,z_m \right\rbrace
+        \end{equation*}
+        be a $\Q\left( \alpha \right)$-basis for $K$. By the tower theorem, we have that
+        \begin{equation*}
+            \left\lbrace y_jz_k \right\rbrace_{1\leq j\leq d, 1\leq k\leq m}
+        \end{equation*}
+        is a $\Q$-basis for $K$.
+
+        Let $A = \left[ T_{\alpha} \right]_{\beta}\in\Q^{d\times d}$ (where we consider the restriction $T_{\alpha}:\Q\left( \alpha \right)\to\Q\left( \alpha \right)$). Recall from linear algebra that
+        \begin{equation*}
+            \alpha y_j = T_{\alpha}\left( y_j \right) = \left(A\left[ y_j \right]_{\beta}\right)^{T} 
+            \begin{bmatrix} y_1 & \cdots & y_d^{T} \end{bmatrix}
+            = \left( Ae_j \right)^{T}
+            \begin{bmatrix} y_1 & \cdots & y_d^{T} \end{bmatrix}
+            = \sum^{d}_{k=1} a_{k,i} y_k,
+        \end{equation*}
+        where $A = \left[ a_{k,i} \right]^{d}_{k,i=1}$. This implies
+        \begin{equation}
+            \alpha y_iz_j = \sum^{d}_{k=1} a_{ki}y_kz_j.
+        \end{equation}
+        Consider the ordered basis
+        \begin{equation*}
+            \gamma = \left( y_1z_1,\ldots,y_dz_1,y_1z_2,\ldots,y_dz_2,\ldots,y_1z_m,\ldots,y_dz_m \right).
+        \end{equation*}
+        Then [1.2] gives (exercise)
+        \begin{equation*}
+            \left[ T_{\alpha} \right]_{\gamma} =
+            \begin{bmatrix}
+            	A &  &  &  \\
+            	 & A &  &  \\
+            	 &  & \ddots &  \\
+            	 &  &  & A \\
+            \end{bmatrix}.
+        \end{equation*}
+        Immediately,
+        \begin{equation*}
+            f = \det\left( xI-A \right)^m = p^m,
+        \end{equation*}
+        where the last equality follows from Case 1.
+    \end{proof}
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+\end{document}
