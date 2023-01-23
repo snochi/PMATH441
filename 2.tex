@@ -1,0 +1,144 @@
+\documentclass[pmath441]{subfiles}
+
+%% ========================================================
+%% document
+
+\begin{document}
+
+    \section{Discriminant}
+
+    Suppose we have a number field $K$ with $\left[ K:\Q \right]=n$ and let $R=\mO_K$. Given $\left\lbrace v_1,\ldots,v_n \right\rbrace\subseteq R$, we desire to find a way to \textit{discriminate} whether or not $\left\lbrace v_1,\ldots,v_n \right\rbrace$ is an integral basis for $R$.
+
+    Fix $K,R$ throughout.
+    
+    \subsection{Elementary Properties of Discriminant}
+
+    \np We first record the definition of discriminant and than investigate many importnat properties of it.
+
+    \begin{definition}{\textbf{Discriminant} of Finite Subset of $K$}
+        Let $\sigma_1,\ldots,\sigma_n$ be embeddings of $K$ in $\CC$. The \emph{discriminant} of $\left\lbrace a_1,\ldots,a_n \right\rbrace\subseteq K$, denoted as $\disc\left( a_1,\ldots,a_n \right)$, is
+        \begin{equation*}
+            \disc\left( a_1,\ldots,a_n \right) = \det \left(\left[ \sigma_i\left( a_j \right) \right]^n_{i,j=1}\right)^{2}.
+        \end{equation*}
+    \end{definition}
+
+    \np Because of the presenece of the power $2$, Def'n 2.1 is \textit{independnet} of choice of ordering of the $\sigma_i$'s and $a_j$'s.
+
+    \np Consider
+    \begin{equation*}
+        B = \left[ \sigma_i\left( a_j \right) \right]^n_{i,j}
+    \end{equation*}
+    and let $A = B^{T}$. Since determinant is multiplicative and is invariant under transpose, it follows
+    \begin{equation*}
+        \det\left( a_1,\ldots,a_n \right) = \det\left( AB \right).
+    \end{equation*}
+    However, the $\left( i,j \right)$th entry of $AB$ is
+    \begin{equation*}
+        \begin{bmatrix} \sigma_1\left( a_i \right) & \cdots & \sigma_n\left( a_i \right) \end{bmatrix} \begin{bmatrix} \sigma_1\left( a_j \right)\\\vdots\\\sigma_n\left( a_j \right) \end{bmatrix} 
+        = \sum^{n}_{k=1} \sigma_k\left( a_i \right)\sigma_k\left( a_j \right)
+        = \sum^{n}_{k=1} \sigma_k\left( a_ia_j \right)
+        = \tr_{K /\Q}\left( a_ia_j \right).
+    \end{equation*}
+    Therefore,
+    \begin{equation*}
+        \disc\left( a_1,\ldots,a_n \right) = \det \left[ \tr_{K /\Q}\left( a_ia_j \right) \right]^n_{i,j=1}.
+    \end{equation*}
+    Some texts use the above formula as the definition.
+
+    Since we know that $\tr_{K /\Q}\left( a \right)$ is a rational number for $a\in K$,
+    \begin{equation*}
+        \disc\left( a_1,\ldots,a_n \right) \in \Q.
+    \end{equation*}
+    In particular, when $a_1,\ldots,a_n\in\mO_K$,
+    \begin{equation*}
+        \disc\left( a_1,\ldots,a_n \right)\in\Z.
+    \end{equation*}
+
+    \np Consider $v,w\in K^n$ and $A\in\Q^{n\times n}$ such that
+    \begin{equation*}
+        Av = w.
+    \end{equation*}
+    Then, for $i\in\left\lbrace 1,\ldots,n \right\rbrace$,
+    \begin{equation*}
+        A\sigma_i\left( v \right) =
+        \begin{bmatrix}
+            A_{1,1} & \cdots & A_{1,n} \\
+        	\vdots & \ddots & \vdots \\
+                A_{n,1} & \cdots & A_{n,n} \\
+        \end{bmatrix}
+        \begin{bmatrix} \sigma_i\left( v_1 \right) \\ \vdots \\ \sigma_i\left( v_n \right) \end{bmatrix} =
+        \begin{bmatrix} \sigma_i\left( \sum^{n}_{j=1} A_{1,j}v_j \right) \\ \vdots \\ \sigma_i\left( \sum^{n}_{j=1} A_{n,j}v_j \right) \end{bmatrix} =
+        \begin{bmatrix} \sigma_i\left( w_1 \right) \\ \vdots \\ \sigma_i\left( w_n \right) \end{bmatrix}.
+    \end{equation*}
+    Therefore,
+    \begin{equation*}
+        A \left[ \sigma_i\left( v_j \right) \right]^n_{i,j=1} = \left[ \sigma_i\left( w_j \right) \right]^n_{i,j=1}.
+    \end{equation*}
+    Thus we conclude
+    \begin{equation*}
+        \det\left( A^{2} \right)\disc\left( v \right) = \disc\left( w \right).
+    \end{equation*}
+    
+    \np Let $\left\lbrace v_1,\ldots,v_n \right\rbrace\subseteq\mO_K$ be an integral basis for $\mO_K$ and let $\left\lbrace w_1,\ldots,w_n \right\rbrace\subseteq\mO_K$. Then there is $\left\lbrace C_{i,j} \right\rbrace^n_{i,j}\subseteq\Z$ such that
+    \begin{equation*}
+        w_i = \sum^{n}_{j=1}C_{i,j}v_j, \hspace{2cm}\forall i\in\left\lbrace 1,\ldots,n \right\rbrace.
+    \end{equation*}
+    That is,
+    \begin{equation*}
+        w = Cv,
+    \end{equation*}
+    where $C = \left[ C_{i,j} \right]^n_{i,j=1}$. Hence
+    \begin{equation*}
+        \disc\left( w \right) = \det\left( C^{2} \right)\disc\left( v \right).
+    \end{equation*}
+    Let $\beta = \left\lbrace v_1,\ldots,v_n \right\rbrace$ and
+    \begin{equation*}
+        \begin{aligned}
+            T:\mO_K&\to\mO_K \\
+            v_i&\mapsto w_i, \hspace{2cm}\forall i\in\left\lbrace 1,\ldots,n \right\rbrace
+        \end{aligned} ,
+    \end{equation*}
+    which is a $\Z$-linear homomorphism. Then
+    \begin{equation*}
+        \left[ T \right]_{\beta} = \begin{bmatrix} \left[ T\left( v_1 \right) \right]_{\beta} & \cdots & \left[ T\left( v_n \right) \right]_{\beta} \end{bmatrix} = \begin{bmatrix} \left[ w_1 \right]_{\beta} & \cdots & \left[ w_n \right]_{\beta} \end{bmatrix} = C^{T}.
+    \end{equation*}
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+\end{document}
