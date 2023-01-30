@@ -1,0 +1,250 @@
+\documentclass[pmath441]{subfiles}
+
+%% ========================================================
+%% document
+
+\begin{document}
+
+    \section{Prime Factorization}
+    
+    Let $K$ be a number field and let $R=\mO_K$. Let's recall some important properties of $R$ as a ring.
+    \begin{enumerate}
+        \item Every nonzero prime ideal of $R$ is maximal.
+        \item If $I$ is a nonzero ideal, then $R /I$ is finite.
+        \item $R$ is Noetherian.
+    \end{enumerate}
+    
+    \subsection{Some Useful Ring Theory}
+    
+    \begin{prop}{}
+        Let $R$ be a ring.\footnotemark[1] The following are equivalent.
+        \begin{enumerate}
+            \item $R$ is Noetherian.
+            \item Every ascending chain of ideals stabilizes.\footnotemark[2] \hfill\textit{ascending chain condition (acc)}
+            \item Every nonempty collection of ideals of $R$ has a maximal (with respect to inclusion) element.
+        \end{enumerate}
+        
+        \noindent
+        \begin{minipage}{\textwidth}
+            \footnotetext[1]{Let us recall that a ring is always commutative and unital in our course.}
+            \footnotetext[2]{This is the \textit{usual} definition of Noetherian ring in commutative algebra.}
+        \end{minipage}
+    \end{prop}
+    
+    \placeqed[Proof is left as an exercise]
+
+    \np The idea for (b) $\implies$ (a) is that, given an ascending chain of ideals, the union is also an ideal. For this ideal to be finitely generated, it must be the case that the chain stabilizes. 
+
+    For (b) $\implies$ (c), if we assume (c) is false, then we can construct an ascending chain of ideals that does not stabilize.
+    
+    \begin{prop}{}
+        Let $R$ be a Noetherian ring and let $I$ be a proper ideal of $R$. Then there exists prime ideals $P_1,\ldots,P_n$ of $R$ such that
+        \begin{enumerate}
+            \item $I\subseteq P_i$ for $i$;
+            \item $P_1\cdots P_n \subseteq I$.
+        \end{enumerate}
+    \end{prop}
+
+    \rruleline
+
+    \np We know that prime factorization of numbers does not work well in a ring of integers. After all, a ring of integers need not be a UFD! Hence, instead of factoring numbers, we are going to \textit{factor ideals} in $\mO_K$. This will work well, and introduce us the notion of \textit{Dedekind domains}. 
+    
+    Note that Proposition 3.2 is bit more general than we require, that it works for any \textit{Noetherian ring}. Indeed, any ring of integer is a Noetherian ring (Corollary 1.10.4, \textit{the} result of Chapter 1).
+
+    \begin{boxyproof}{Proof of Proposition 3.2}
+        Let $X$ be the collection of proper ideals of $R$ not having the property. Assume for contradiction that $X$ is nonempty. Let $I\in X$ be an maximal \textit{element} of $X$ (we do not insist that $I$ is a maximal \textit{ideal} in $R$).
+
+        Clearly $I$ is not prime. If not, then take $P_1=I$ and observe that $I$ has the property. Since $I$ is not prime, we may find $a,b\in R$ such that $ab\in I$ but $a,b\notin I$. By maximality of $I$, $I+\left< a \right>,I+\left< b \right>\notin X$. Note that, for any ideal $J$, $IJ\subseteq I$ (this is a property of ideal product; check this!). Moreover, $ab\in I$ and $\left< a \right>,\left< b \right>$ are principal ideals, so that $\left< a \right>\left< b \right> = \left< ab \right> \subseteq I$. Hence it follows that     
+        \begin{equation*}
+            \left( I+\left< a \right>  \right)\left( I+\left< b \right>  \right) \subseteq I.
+        \end{equation*}
+        Hence $I+\left< a \right>, I+\left< b \right>\neq R$ (since $JR=RJ=J$ for any ideal $J$). Therefore, there are prime ideals $P_1,\ldots,P_n,Q_1,\ldots,Q_m$ such that
+        \begin{enumerate}
+            \item $I+\left< a \right>\subseteq P_i, I+\left< b \right>\subseteq Q_j$ for $i,j$ $\implies$ $I\subseteq I+\left< a \right>\subseteq P_i$, $I\subseteq I+\left< b \right>\subseteq Q_j$ for $i,j$; and
+            \item $P_1\cdots P_n\subseteq I+\left< a \right>, Q_1\cdots Q_m\subseteq I+\left< b \right>$ $\implies$ $P_1\cdots P_nQ_1\cdots Q_m\subseteq\left( I+\left< a \right>  \right)\left( I+\left< b \right>  \right)\subseteq I$.
+        \end{enumerate}
+        Thus $I\notin X$, which is a contradiction.
+    \end{boxyproof}
+    
+    \begin{definition}{\textbf{Coprime} Ideal}
+        Let $R$ be a ring and let $I,J\subseteq R$ be prime ideals. We say $I,J$ are \emph{coprime} if and only if $I+J=R$.
+    \end{definition}
+
+    \np A motivation for the above definition comes from the Bezout lemma.
+
+    \begin{prop}{}
+        Let $R$ be a ring and let $I,J$ be coprime ideals of $R$. Then for any $n,m\in\N$, $I^n,J^m$ are coprime.
+    \end{prop}
+
+    \begin{proof}
+        Since $I,J$ are proper, so are $I^n\subseteq I, J^m\subseteq J$. Suppose for contradiction that
+        \begin{equation*}
+            I^n+J^m \neq R.
+        \end{equation*}
+        Then $I^n+J^m\subseteq M$ for some maximal ideal $M$, which means $I^n,J^m\subseteq M$. But any maximal ideal is a prime ideal, so that $M$ is a prime ideal. Recall that, 
+        \begin{equation*}
+            \text{\textit{given two ideals $\tilde{I},\tilde{J}$ and a prime ideal $P$ such that $\tilde{I},\tilde{J}\subseteq P$, $\tilde{I}\subseteq P$ or $\tilde{J}\subseteq P$.}}
+        \end{equation*}
+        In particular, $I,J\subseteq M$. This means $I+J\subseteq M\neq R$, a contradiction.
+    \end{proof}
+
+    \np Recall the following theorem from ring theory.
+
+    \begin{theorem}{Chinese Remainder Theorem}
+        Let $R$ be a ring and let $I,J$ be coprime ideals of $R$. Then $R /IJ \iso R /I\times R /J$.
+    \end{theorem}
+
+    \begin{proof}
+        When we want two algebraic objects to be \textit{isomorphic}, 99.9\% of the time we want to explicitly find an isomorphism. Since we are working with quotient rings, we resort to the first isomorphism theorem.
+
+        Let
+        \begin{equation*}
+            \begin{aligned}
+                \phi:R&\to R /I\times R /J \\
+                x & \mapsto \left( x+I,x+J \right).
+            \end{aligned} 
+        \end{equation*}
+        Then
+        \begin{equation*}
+            \ker\left( \phi \right) = I\cap J.
+        \end{equation*}
+        Now observe that,
+        \begin{equation*}
+            IJ\subseteq I\cap J = \left( I\cap J \right)R = \left( I\cap J \right)\left( I+J \right) = \underbrace{\left( I\cap J \right)I}_{\subseteq IJ} + \underbrace{\left( I\cap J \right)J}_{\subseteq IJ} \subseteq IJ,\footnotemark[1]
+        \end{equation*} 
+        so that
+        \begin{equation*}
+            IJ \subseteq I.
+        \end{equation*}
+        Hence we conclude
+        \begin{equation*}
+            \ker\left( \phi \right) = IJ.
+        \end{equation*}
+        To invoke the first isomorphism theorem, we want to show that $\phi$ is surjective. Take $a\in I, b\in J$ such that $a+b = 1$ (since $I+J=R$). For $x,y\in R$
+        \begin{equation*}
+            \begin{aligned}
+                \phi\left( ax+by \right) & = \left( \underbrace{ax}_{\in I}+by+I,ax+\underbrace{by}_{\in J}+J \right) = \left( by+I,ax+J \right) \\
+                                         & = \left( b+I,a+J \right)\left( y+I,x+J \right) = \left( 1+I,1+J \right)\left( y+I,x+J \right) = \left( y+I,x+J \right).
+            \end{aligned} 
+        \end{equation*}
+        Note that we are using $a+b=1$ but $a+I=0+I, b+J=0+J$ to obtain the second-last equality.
+
+        Thus $\phi$ is surjective and
+        \begin{equation*}
+            R /IJ \iso R /I\times R /J
+        \end{equation*}
+        by the first isomorphism theorem.
+        
+        \noindent
+        \begin{minipage}{\textwidth}
+            \footnotetext[1]{Note that the above argument worked because of the \textit{coprimeness} of $I,J$: $R=I+J$.}
+        \end{minipage}
+    \end{proof}
+    
+    \clearpage
+    
+    \begin{theorem}{Generalized Chinese Remainder Theorem}
+        Let $R$ be a ring and let $I_1,\ldots,I_n$ be \textit{pairwise} coprime ideals. Then $R /I_1\cdots I_n \iso R /I_1 \times \cdots \times R /I_n$.
+    \end{theorem}
+
+    \rruleline
+
+    \begin{prop}{}
+        Let $R$ be a finite ring. Then 
+        \begin{equation*}
+            R \iso R /P_1^{n_1} \times \cdots \times R /P_m^{n_m}
+        \end{equation*}
+        for some distinct prime ideals $P_1,\ldots,P_m$ and $n_1,\ldots,n_m\in\N$.
+    \end{prop}
+
+    \rruleline
+
+    \np In case $R$ is an integral domain, we can simply take $P_1 = \left\lbrace 0 \right\rbrace$ and \textit{call it a day!} In fact, the key idea for the general case is to identify $R$ with $R / \left\lbrace 0 \right\rbrace$.
+
+    \begin{boxyproof}{Proof of Proposition 3.6}
+        Note that
+        \begin{equation*}
+            R\text{ is finite} \implies R\text{ is Noetherian}.\footnotemark[1]
+        \end{equation*}
+        So we may find prime ideals $Q_1,\ldots,Q_k\subseteq R$ such that $Q_1\cdots Q_k=\left\lbrace 0 \right\rbrace$. \textit{Graping} the $Q_i$'s we obtain distinct prime ideals $P_1,\ldots,P_m$ such that
+        \begin{equation*}
+            P_1^{n_1}\cdots P_m^{n_m} = \left\lbrace 0 \right\rbrace.
+        \end{equation*}
+        For each $P_i$,
+        \begin{equation*}
+            R\text{ is finite and }P_i\text{ is prime}\implies R /P_i\text{ is finite integral domain} \implies R /P_i\text{ is a field}.
+        \end{equation*}
+        Hence each $P_i$ is maximal, which imply
+        \begin{equation*}
+            P_i+P_j = R, \hspace{2cm}\forall i\neq j.
+        \end{equation*}
+        It follows $P_i^{n_i}+P_j^{n_j}=R$. Hence $P_1,\ldots,P_m$ are pairwise coprime ideals, so by the generalized Chinese remainder theorem,
+        \begin{equation*}
+            R \iso R /\left\lbrace 0 \right\rbrace = R /P_1^{n_1}\cdots P_m^{n_m} \iso R /P_1^{n_1}\times\cdots R /P_m^{n_m}.
+        \end{equation*}
+
+        \noindent
+        \begin{minipage}{\textwidth}
+            \footnotetext[1]{"Good luck in finding an infinite ascending chain in a finite ring!" - Blake}
+        \end{minipage}
+    \end{boxyproof}
+
+    \subsection{Prime Ideals of a Ring of Integers}
+
+    Once again, let $K$ be a number field of degree $n$ and let $R = \mO_K$. Then we recall that
+    \begin{enumerate}
+        \item $R$ is Noetherian; 
+        \item $R /I$ is finite for any nonzero proper ideal $I$;
+        \item every ideal $\overline{J}$ of $R /I$ is of the form $\overline{J} = J /I$, where $J\subseteq R$ is an ideal such that $I\subseteq J$; moreover, $\overline{J}$ is prime if and only if $J$ is prime;\footnote{In fact, this is true for any ring!} and\hfill\textit{correspondence theorem}
+        \item $R /I \iso \left( R /I \right) / \left( P_1^{n_1} / I \right) \times \cdots \times \left( R /I \right) / \left( P_m^{n_m} / I \right) \iso R /P^{n_1}\times\cdots\times R /P_m^{n_m}$, where each $P_i\subseteq R$ is prime with $I\subseteq P_i$.
+    \end{enumerate}
+    The big idea for this section is that:
+    \begin{equation*}
+        \text{\textit{to understand $I$, we study the prime ideals $P$ containing $I$.}}
+    \end{equation*}
+    Turns out, for a prime ideal $P$,
+    \begin{equation*}
+        I\subseteq P \iff P\text{ is a \textit{prime factor} of $I$}.
+    \end{equation*}
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+\end{document}

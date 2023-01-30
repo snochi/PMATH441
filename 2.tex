@@ -103,7 +103,294 @@
         \left[ T \right]_{\beta} = \begin{bmatrix} \left[ T\left( v_1 \right) \right]_{\beta} & \cdots & \left[ T\left( v_n \right) \right]_{\beta} \end{bmatrix} = \begin{bmatrix} \left[ w_1 \right]_{\beta} & \cdots & \left[ w_n \right]_{\beta} \end{bmatrix} = C^{T}.
     \end{equation*}
     
+    \np Let $A\in\Z^{n\times n}$. If $\det\left( A \right)\neq 0$, then recall that
+    \begin{equation*}
+        A^{-1} = \frac{1}{\det\left( A \right)}\adj\left( A \right).
+    \end{equation*}
+    Since $A\in\Z^{n\times n}$, every cofactor of $A$ is in $\Z$, so that $\adj\left( A \right)\in\Z^{n\times n}$. Thus,
+    \begin{equation*}
+        A^{-1}\in\Z^{n\times n}\iff\det\left( A \right) = 1 \text{ or }\det\left( A \right) = -1.
+    \end{equation*}
+
+    \np Let $\left\lbrace v_1,\ldots,v_n \right\rbrace\mO_K$ be an integral basis and suppose 
+    \begin{equation*}
+        \disc\left( v \right) = \disc\left( w \right)
+    \end{equation*}
+    for some $\left\lbrace w_1,\ldots,w_n \right\rbrace\in\mO_K$. Then
+    \begin{equation*}
+        Cv = w
+    \end{equation*}
+    for some $C\in\Z^{n\times n}$. This implies that
+    \begin{equation*}
+        \det\left( C^{2} \right)\disc\left( v \right)=\disc\left( w \right),
+    \end{equation*}
+    so that
+    \begin{equation*}
+        \left( \det\left( C \right) \right)^{2} = 1.\footnote{Note the degenerate case where $\disc\left( v \right)=\disc\left( w \right)=0$. We will show that this never happens.}
+    \end{equation*}
+    Hence $\det\left( C \right) = 1$ or $\det\left( C \right) = -1$, which means $C$ is invertible with $C^{-1}\in\Z^{n\times n}$. This implies that $C^{T}$ is invertible with integer inverse, so that
+    \begin{equation*}
+        \begin{aligned}
+            T:\mO_K&\to\mO_K
+        \end{aligned} 
+    \end{equation*}
+
+    Therefore, given an integral basis $\left\lbrace v_1,\ldots,v_n \right\rbrace$, we can search for other integral basis by looking at subsets $\left\lbrace w_1,\ldots,w_n \right\rbrace$ whose discriminant agrees with $\disc\left( v \right)$.
+
+    Conversely, if
+    \begin{equation*}
+        \left\lbrace v_1,\ldots,v_n \right\rbrace,\left\lbrace w_1,\ldots,w_n \right\rbrace\subseteq\mO_K
+    \end{equation*}
+    are integral bases, then $Av=w, Bw=v$ for some $A,B\in\Z^{n\times n}$. It follows that $\det\left( A \right)^{2}\disc\left( v \right)=\disc\left( w \right)$ and $\det\left( B \right)^{2}\disc\left( w \right)=\disc\left( v \right)$. Thus we have that
+    \begin{equation*}
+        \disc\left( v \right) = \disc\left( w \right).
+    \end{equation*}
+
+    \np Let $\left\lbrace a_1,\ldots,a_n \right\rbrace\subseteq K$. Suppose there is nonzero $\left( c_1,\ldots,c_n \right)\in\Q^n$ such that
+    \begin{equation*}
+        \sum^{n}_{j=1} c_ja_j = 0.
+    \end{equation*}
+    This means
+    \begin{equation*}
+        \sum^{n}_{j=1} c_j\sigma_i\left( a_j \right) = 0
+    \end{equation*}
+    for any embedding $\sigma_i$ of $K$ in $\CC$, so that $\left[ \sigma_i\left( a_j \right) \right]^{n}_{i,j}$ is not invertible. It follows that
+    \begin{equation*}
+        \disc\left( a_1,\ldots,a_n \right) = 0.
+    \end{equation*}
+    Conversely, suppose that $\disc\left( a_1,\ldots,a_n \right) = 0$. Then the columns of $\left[ \sigma_{i}\left( a_j \right) \right]^{n}_{i,j=1}$ are linearly dependent. That is,
+    \begin{equation*}
+        \sum^{n}_{j=1}c_j\sigma_i\left( a_j \right) = 0,\hspace{2cm}\forall i,
+    \end{equation*}
+    for some nonzero $\left( c_1,\ldots,c_n \right)\in\Q^n$. By considering $\sigma_i = \iota : K\to\CC$ by $k\mapsto k$, we observe that $\sum^{n}_{j=1} a_j = 0$. Thus $\left\lbrace a_1,\ldots,a_n \right\rbrace$ is $\Q$-linearly dependent.
     
+    \subsection{Discriminant of Number Fields}
+
+    Fix a number field $K$ with $\left[ K:\Q \right] = n$.
+
+    \begin{definition}{\textbf{Discriminant} of a Number Field}
+        We define the \emph{discriminant} of $K$, $\disc\left( K \right)$, as
+        \begin{equation*}
+            \disc\left( K \right) = \disc\left( v_1,\ldots,v_n \right),
+        \end{equation*}
+        where $v_1,\ldots,v_n$ is an integral basis for $\mO_K$.
+    \end{definition}
+    
+    \begin{example}{}
+        Consider $K = \Q\left( \sqrt{d} \right)$, where $d\neq 1$ is squarefree.
+        
+        \begin{case}
+            \textit{$d\equiv 1\mod 4$.}
+
+            We claim that $\left\lbrace 1,\frac{1+\sqrt{d}}{2} \right\rbrace$ is an integral basis (check this; exercise!). Then
+            \begin{equation*}
+                \disc\left( K \right) = \det
+                \begin{bmatrix}
+                	1 & \frac{1+\sqrt{d}}{2} \\
+                	1 & \frac{1-\sqrt{d}}{2} \\
+                \end{bmatrix}^{2} =
+                \left( \frac{1-\sqrt{d}}{2}-\frac{1+\sqrt{d}}{2} \right)^{2} = \left( -\sqrt{d} \right)^{2} = d.
+            \end{equation*}
+        \end{case}
+
+        \begin{case}
+            \textit{$d\equiv 2,3\mod 4$.}
+
+            In this case, $\left\lbrace 1,\sqrt{d} \right\rbrace$ is an integral basis, so that
+            \begin{equation*}
+                \disc\left( K \right) = \det
+                \begin{bmatrix}
+                	1 & \sqrt{d} \\
+                	1 & -\sqrt{d} \\
+                \end{bmatrix}^{2} = 4d.
+            \end{equation*}
+        \end{case}
+    \end{example}
+    
+    \rruleline
+    
+    \subsection{Computational Considerations}
+
+    \begin{recall}{\textbf{Discriminant} of a Polynomial}
+        Let $p\in\CC\left[ x \right]$ and let $\alpha_1,\ldots,\alpha_n\in\CC$ be the roots of $p$. Then we define the \textit{discriminant} of $p$, $\disc\left( p \right)$, by
+        \begin{equation*}
+            \disc\left( p \right) = \prod^{}_{i<j} \left( \alpha_i-\alpha_j \right)^{2}.
+        \end{equation*}
+    \end{recall}
+
+    \begin{example}{Discriminant of Quadratic, Cubic Polynomials}
+        For a quadratic $x^{2}+bx+c$,
+        \begin{equation*}
+            \disc\left( x^{2}+bx+c \right) = b^{2}-4c.
+        \end{equation*}
+        For a \textit{depressed} cubic $x^{3}+bx+c$,
+        \begin{equation*}
+            \disc\left( x^{3}+bx+c \right) = -4b^{3}-27c^{2}.
+        \end{equation*}
+        To turn a general cubic $x^{3}+ax^{2}+bx+c$ into a depressed cubic, substitute $x$ by $x-\frac{a}{3}$ which \textit{eliminates} $x^{2}$ term. Since every root is \textit{shifted by the same amout $\frac{a}{3}$}, it follows that the discriminant is the same:
+        \begin{equation*}
+            \disc\left( x^{3}+ax^{2}+bx+c \right) = -4b^{3}-27c^{2}.
+        \end{equation*}
+    \end{example}
+
+    \rruleline
+    
+    \begin{definition}{\textbf{Discriminant} of an Algebraic Number}
+        Suppose $\alpha\in\CC$ is such that $\left[ \Q\left( \alpha \right):\Q \right] = n$. Then we define the \emph{discriminant} of $\alpha$, $\disc\left( \alpha \right)$, to be
+        \begin{equation*}
+            \disc\left( \alpha \right) = \disc\left( 1,\alpha,\ldots,\alpha^{n-1} \right).
+        \end{equation*}
+    \end{definition}
+
+    \np Observe that $\left\lbrace 1,\alpha,\ldots,\alpha^{n-1} \right\rbrace$ is an integral basis for $\Z\left[ \alpha \right]$. Moreover,
+    \begin{equation*}
+        \disc\left( \alpha \right) = \det
+        \begin{bmatrix}
+            1 & \alpha_1 & \alpha_1^{2} & \cdots & \alpha_1^{n-1} \\
+            1 & \alpha_2 & \alpha_2^{2} & \cdots & \alpha_2^{n-1} \\
+            1 & \alpha_3 & \alpha_3^{2} & \cdots & \alpha_3^{n-1} \\
+            \vdots & \vdots & \vdots & \cdots & \vdots \\
+            1 & \alpha_n & \alpha_n^{2} & \cdots & \alpha_n^{n-1} \\
+        \end{bmatrix}^{2}.
+    \end{equation*}
+    Observe that we have a Vandermonde matrix, whose determinant is famously 
+    \begin{equation*}
+        \det
+        \begin{bmatrix}
+            1 & \alpha_1 & \alpha_1^{2} & \cdots & \alpha_1^{n-1} \\
+            1 & \alpha_2 & \alpha_2^{2} & \cdots & \alpha_2^{n-1} \\
+            1 & \alpha_3 & \alpha_3^{2} & \cdots & \alpha_3^{n-1} \\
+            \vdots & \vdots & \vdots & \cdots & \vdots \\
+            1 & \alpha_n & \alpha_n^{2} & \cdots & \alpha_n^{n-1} \\
+        \end{bmatrix} = \prod^{}_{i<j} \left( \alpha_i-\alpha_j \right)
+    \end{equation*}
+    Since we have the square term, it follows that
+    \begin{equation*}
+        \disc\left( \alpha \right) = \prod^{}_{i<j}\left( \alpha_i-\alpha_j \right)^{2} = \disc\left( p \right),
+    \end{equation*}
+    where $p$ is the minimal polynomial of $\alpha$. Thus the discriminant of an algebraic number and its minimal polynomial coincides.
+    
+    \np Suppose $\left\lbrace v_1,\ldots,v_n \right\rbrace$ is an integral basis for $\mO_{\Q\left( \alpha \right)}$. Then
+    \begin{equation*}
+        \begin{bmatrix} 1\\\cdots\\\alpha^{n-1} \end{bmatrix} = A \begin{bmatrix} v_1\\\cdots\\v_n \end{bmatrix}
+    \end{equation*}
+    for some invertible $A\in\Z^{n\times n}$. Therefore,
+    \begin{equation*}
+        \disc\left( \alpha \right) = \det\left( A \right)^{2}\disc\left( \Q\left( \alpha \right) \right) = \left[ \mO_{\Q\left( \alpha \right)}:\Z\left[ \alpha \right] \right]^{2}\disc\left( \Q\left( \alpha \right) \right)
+    \end{equation*}
+    by Assignment 2.
+
+    \np As a corollary, if $\disc\left( \alpha \right)$ is squarefree, then
+    \begin{equation*}
+        \mO_{\Q\left( \alpha \right)} = \Z\left[ \alpha \right].
+    \end{equation*}
+
+    \begin{example}{}
+        Suppose $\alpha\in\CC$ is such that $p\left( \alpha \right) = 0$, where
+        \begin{equation*}
+            p = x^{3}+x+1.
+        \end{equation*}
+        Note that $p$ is irreducible over $\Q$, so it is the minimal polynomial for $\alpha$. Then $\disc\left( \alpha \right) = \disc\left( p \right) = -4-27 = -31$, which is prime so is squarefree.
+
+        Thus
+        \begin{equation*}
+            \mO_{\Q\left( \alpha \right)} = \Z\left[ \alpha \right] = \left\lbrace a+b\alpha+c\alpha^{2} \right\rbrace.
+        \end{equation*}
+    \end{example}
+
+    \rruleline
+    
+    \np Let $\alpha$ be an algebraic number with minimal polynomial $p\in\Q\left[ x \right]$ and $\left[ \Q\left( \alpha \right):\Q \right]=n$. Let $\alpha_1=\alpha$ and let $\alpha_2,\ldots,\alpha_n$ be the conjugates of $\alpha$. Then
+    \begin{equation*}
+        p = \left( x-\alpha_1 \right)\cdots\left( x-\alpha_n \right).
+    \end{equation*}
+    Consider the \textit{formal derivative} of $p$, which we can find using the product rule:
+    \begin{equation*}
+        p' = \sum^{n}_{i=1} \prod^{n}_{j=1,j\neq i} \left( x-\alpha_j \right) .
+    \end{equation*}
+    Then
+    \begin{equation*}
+        p'\left( \alpha_i \right) = \prod^{n}_{j=1,j\neq i} \left( \alpha_i-\alpha_j \right) , \hspace{2cm}\forall i.
+    \end{equation*}
+    Now, given the embeddings $\sigma_1,\ldots,\sigma_n:\Q\left( \alpha \right)\to\CC$,
+    \begin{equation*}
+        \begin{aligned}
+            N_{K /\Q}\left( p'\left( \alpha \right) \right) & = \prod^{n}_{i=1} \sigma_r\left( p'\left( \alpha \right) \right) = \prod^{n}_{i=1} p'\left( \sigma_i\left( \alpha \right) \right) && \text{since $\sigma_i$ fix each element in $\Q$} \\
+                                                            & = \prod^{n}_{i=1} p'\left( \alpha_i \right) = \prod^{n}_{i\neq j} \left( \alpha_i-\alpha_j \right) = \left( -1 \right)^{\binom{n}{2}} \prod^{n}_{i<j} \left( \alpha_i-\alpha_j \right)^{2} \\
+                                                            & = \left( -1 \right)^{\binom{n}{2}} \disc\left( p \right) = \left( -1 \right)^{\binom{n}{2}} \disc\left( \alpha \right) .
+        \end{aligned} 
+    \end{equation*}
+
+    \begin{definition}{\textbf{Resultant}}
+        Let $f=\sum^{n}_{i=0}a_ix^i, g=\sum^{m}_{j=0}b_jx^j\in\CC\left[ x \right]$. Then we define the \emph{resultant} of $f,g$, denoted as $\res\left( f,g \right)$, is the determinant of
+        \begin{equation*}
+            \begin{bmatrix} 
+                a & 0 & \cdots & \cdots & \cdots & \cdots & 0\\
+                0 & a & 0 & \cdots & \cdots & \cdots & 0 \\
+                  & \ddots & \ddots & \ddots & \ddots & \ddots & 0 \\
+                0 & \cdots & 0 & a & 0 & \cdots & 0 \\
+                b & 0 & \cdots & \cdots & \cdots & \cdots & 0  \\
+                0 & b & 0 & \cdots & \cdots & \cdots & 0 \\
+                  & \ddots & \ddots & \ddots & \ddots & \ddots & 0 \\
+                0 & \cdots & 0 & b & 0 & \cdots & 0 \\
+            \end{bmatrix} \in\Q^{\left( n+m \right)\times\left( n+m \right)} ,
+        \end{equation*}
+        where $a = \left( a_n,\ldots,a_0 \right), b = \left( b_m,\ldots,b_0 \right)$.
+    \end{definition}
+
+    \begin{example}{}
+        We have
+        \begin{equation*}
+            \res\left( x^3+x+2,x^{2}+4x-1 \right) =
+            \det
+            \begin{bmatrix}
+            	1 & 0 & 1 & 2 & 0 \\
+            	0 & 1 & 0 & 1 & 2 \\
+            	1 & 4 & -1 & 0 & 0 \\
+            	0 & 1 & 4 & -1 & 0 \\
+            	0 & 0 & 1 & 4 & -1 \\
+            \end{bmatrix}.
+        \end{equation*}
+    \end{example}
+
+    \rruleline
+    
+    \begin{fact}{}
+        Let $\alpha\in\CC$ be an algebraic number with the minimal polynomial $p\in\Q\left[ x \right]$ such that $\alpha\in\mO_{\Q\left( \alpha \right)}$ and $\left[ \Q\left( \alpha \right):\Q \right]=n$. Then
+        \begin{equation*}
+            \disc\left( \alpha \right) = \left( -1 \right)^{\binom{n}{2}}\res\left( p,p' \right).
+        \end{equation*}
+    \end{fact}
+
+    \begin{example}{}
+        Let $\alpha\in\CC$ be such that $p\left( \alpha \right) = 0$, where
+        \begin{equation*}
+            p = x^3-x^2-1.
+        \end{equation*}
+        Since $p\left( 1 \right),p\left( -1 \right)\neq 0$, so $p$ is irreducible over $\Q$. Hence $\left[ \Q\left( \alpha \right):\Q \right] = 3$. 
+
+        Note that
+        \begin{equation*}
+            p' = 3x^{2}-2x.
+        \end{equation*}
+        It follows that
+        \begin{equation*}
+            \disc\left( \alpha \right) = \left( -1 \right)^{\binom{3}{2}} \det
+            \begin{bmatrix}
+            	1 & -1 & 0 & -1 & 0 \\
+            	0 & 1 & -1 & 0 & -1 \\
+            	3 & -2 & 0 & 0 & 0 \\
+            	0 & 3 & -2 & 0 & 0 \\
+            	0 & 0 & 3 & -2 & 0 \\
+            \end{bmatrix} = 31.
+        \end{equation*}
+        Since $31$ is squarefree, so that
+        \begin{equation*}
+            \mO_K = \Z\left[ \alpha \right].
+        \end{equation*}
+    \end{example}
+    
+    \rruleline
     
     
     
