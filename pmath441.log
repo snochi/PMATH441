@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/Debian) (preloaded format=xelatex 2022.10.25)  30 JAN 2023 10:21
+This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/Debian) (preloaded format=xelatex 2022.10.25)  10 FEB 2023 02:35
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -887,7 +887,7 @@ LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
 (Font)                  TU/MinionPro(2)/m/it --> TU/MinionPro(2)/bx/it on input line 80.
 \symOperators:m:n=\mathgroup11
 \c@sumcounter=\count331
-LaTeX Info: Redefining \emph on input line 133.
+LaTeX Info: Redefining \emph on input line 151.
 \c@defncounter=\count332
 \c@stcounter=\count333
 \c@axcounter=\count334
@@ -1006,9 +1006,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 432--434
 
 ] [11
 
-] [12] [13
-
-] [14
+] [12] [13] [14
 
 ]) (./2.tex [15] [16
 
@@ -1024,24 +1022,40 @@ Underfull \hbox (badness 10000) in paragraph at lines 138--142
 
  []
 
-[23]) [24
+[23] [24
 
-]
+] [25]
+Underfull \hbox (badness 10000) in paragraph at lines 327--333
+
+ []
+
+[26
+
+] [27] [28
+
+] [29]
+Underfull \hbox (badness 10000) in paragraph at lines 619--625
+
+ []
+
+[30
+
+] [31]) [32]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 20.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 20.
  (./pmath441.aux)
 Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 20.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 20.
 Package rerunfilecheck Info: File `pmath441.out' has not changed.
-(rerunfilecheck)             Checksum: 1592216E660892ACFED5D5BB6B14B8F2;877.
+(rerunfilecheck)             Checksum: FF0E42BB0D00BBF6687A2A61320F27C9;1009.
  ) 
 Here is how much of TeX's memory you used:
- 27760 strings out of 481804
- 533220 string characters out of 5937875
- 870744 words of memory out of 5000000
- 44185 multiletter control sequences out of 15000+600000
+ 27819 strings out of 481804
+ 533541 string characters out of 5937875
+ 871862 words of memory out of 5000000
+ 44244 multiletter control sequences out of 15000+600000
  544148 words of font info for 129 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 68i,14n,88p,799b,487s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 68i,14n,88p,799b,575s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on pmath441.pdf (24 pages).
+Output written on pmath441.pdf (32 pages).
