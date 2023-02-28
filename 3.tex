@@ -702,7 +702,7 @@
     \end{equation*}
     Hence \textit{if} we can factor each $\left< p_i \right>$, then we can find the candidates for $P_i$'s and hence factor $I$. Also, due to [3.3], $N\left( I \right)$ helps us find $n_i$ as well.
 
-    \np Therefore, here are the goals for this section in order for the above story to work out.
+    \np Therefore, here are the goals in order for the above story to work out.
     \begin{formula}{Goals}
         \begin{enumerate}
             \item Prove that ideal norm is multiplicative.
@@ -739,6 +739,454 @@
         \item discrete valuation ring.
     \end{enumerate}
     
+    \np Suppose $R = \mO_K$ with an integral basis $\left\lbrace v_1,\ldots,v_n \right\rbrace$, and let $I$ be a nonzero ideal of $R$. Then by Assignment 2,
+    \begin{equation*}
+        \disc\left( w_1,\ldots,w_n \right) = \left[ R:I \right]^{2} \disc\left( v_1,\ldots,v_n \right) = N\left( I \right)^{2}\disc\left( K \right).
+    \end{equation*}
+    In the special case $I$ is principal,
+    \begin{equation*}
+        I = \left< \alpha \right> 
+    \end{equation*}
+    for some $\alpha\neq 0$, $\left\lbrace \alpha v_1,\ldots,\alpha v_n \right\rbrace$ is an integral basis for $I$. Then
+    \begin{equation}
+        \disc\left( \alpha v_1,\ldots,\alpha v_n \right) = N\left( I \right)^{2}\disc\left( K \right).
+    \end{equation}
+    On the other hand,
+    \begin{equation}
+        \disc\left( \alpha v_1,\ldots,\alpha v_n \right) = \det \left(\left[ \sigma_i\left( \alpha v_j \right) \right]^n_{i,j=1}\right)^{2} = \left( \prod^{n}_{j=1}\sigma_j\left( \alpha \right) \right)^{2} \det \left( \left[ \sigma_i\left( v_j \right) \right]^n_{i,j=1} \right)^{2} = N_{K /\Q}\left( \alpha \right)^{2} \disc\left( K \right).
+    \end{equation}
+    It follows from [3.5], [3.6] that
+    \begin{equation*}
+        N\left( I \right)^{2} = N_{K /\Q}\left( \alpha \right)^{2} \implies N\left( \left< \alpha \right>  \right) = \left| N_{K /\Q}\left( \alpha \right) \right|.
+    \end{equation*}
+    
+    \subsection{Localization}
+
+    Recall that the goal is to prove multiplicativity of ideal norm by showing
+    \begin{equation*}
+        N\left( P^n \right) = N\left( P \right)^n
+    \end{equation*}
+    for a prime ideal $P$.
+    
+    \begin{definition}{\textbf{Local Ring}}
+        A \emph{local ring} is a ring $R$ which has a unique maximal ideal.
+    \end{definition}
+
+    \np How do we spot a local ring? Here is Blake's favorite way.
+
+    \begin{prop}{}
+        Let $R$ be a ring. Then
+        \begin{equation*}
+            R\text{ is local} \iff R\setminus R^{\times} \text{ is an ideal of $R$}.
+        \end{equation*}
+        In this case, $R\setminus R^{\times}$ is the unique maximal ideal of $R$.
+    \end{prop}
+
+    \begin{proof}
+        Let $I = R\setminus R^{\times}$.
+
+        ($\implies$) Suppose $R$ is local with a unique maximal ideal $M$. Since $M$ is proper, $M$ does not have any units, so that
+        \begin{equation*}
+            M \subseteq I.
+        \end{equation*}
+        But $I \subseteq \left< I \right> \subseteq M$, since $I$ does not have any units and $M$ is the unique maximal ideal. 
+
+        ($\impliedby$) Suppose $I$ is an ideal. Then for any maximal ideal $M\subseteq R$, $M\subseteq I$, since $M$ does not have any unit. But $M$ is maximal, so $M = I$.
+    \end{proof}
+
+    \begin{example}{}
+        Fields are local.
+    \end{example}
+
+    \rruleline
+
+    \begin{example}{}
+        Consider $\Z_{p^n}$ with $n>1$. Then
+        \begin{equation*}
+            x\notin\Z_{p^n}^{\times} \iff \gcd\left( x,p^n \right)\neq 1 \iff p|x \iff x\in\left< p \right>,  
+        \end{equation*}
+        so $\left< p \right>$ is the unique maximal ideal for $\Z_{p^n}$. Thus $\Z_{p^n}$ is local.
+    \end{example}
+
+    \rruleline
+
+    \np How can we construct local integral domains? The answer is \textit{localization}.
+    \begin{equation*}
+        \text{\textit{"Localization is a process of making a local ring." - Blake}}
+    \end{equation*}
+    There are three ingredients to localization: an integral domain, the field of fractions and a prime ideal.
+
+    \begin{definition}{\textbf{Localization}}
+        Let $R$ be an integral domain, let $K$ be the field of fractions and let $P$ be a prime ideal. The \emph{localization} of $R$ at $P$ is
+        \begin{equation*}
+            R_P = \left\lbrace \frac{a}{b}\in K: b\notin P \right\rbrace.
+        \end{equation*}
+    \end{definition}
+
+    \np There's more general version of localization, but let's leave that to commutative algebraists.
+
+    \np Observe that we are using a \textit{lazy notation}. In fact, we can have $\frac{a}{b}\in R_P$ when $b\in P$. What we need is for there to exist $c,d\in R$ such that $\frac{a}{b} = \frac{c}{d}$ but $d\notin P$. The following example demonstrates this remark.
+
+    \begin{example}{}
+        Consider $R=\Z,P=\left< 2 \right>$. Then $\frac{4}{6}$ \textit{looks like} it should not belong to $\Z_{\left< 2 \right>}$, since $2|6$. However, $\frac{4}{6} = \frac{2}{3}$ and $2\nmid 3$, so that $\frac{4}{6}\in \Z_{\left< 2 \right>}$.
+    \end{example}
+
+    \rruleline
+
+    \np Let $\frac{a}{b}, \frac{c}{d}\in K$ with $b,d\notin P$. Then
+    \begin{equation*}
+        \frac{a}{b}+\frac{c}{d} = \frac{ad+bc}{bd}\in R_P,
+    \end{equation*}
+    since $bd\notin P$.\footnote{\textit{"The complement of a prime ideal is multiplicatively closed."} - Blake} In a similar manner
+    \begin{equation*}
+        \frac{a}{b} \frac{c}{d} = \frac{ac}{bd}\in R_P.
+    \end{equation*}
+    Hence $R_P$ is a subring of $K$.
+    
+    \np Observe that
+    \begin{equation}
+        R_P \setminus R_P^{\times} = PR_P = \left\lbrace \sum^{n}_{j=1}a_jr_j: a_j\in P, r_j\in R_P \right\rbrace.
+    \end{equation}
+    Proving [3.7] is left as an exercise.
+
+    In particular, $R_P\setminus R_P^{\times}$ is an ideal, so by Proposition 3.14 $R_P$ is local.
+
+    \np Since we are going to refer $PR_P$ often, let's give it a notation.
+
+    \begin{notation}{$P_P$}
+        We write $P_P$ to denote $PR_P$.
+    \end{notation}
+    
+    \np It turns out
+    \begin{equation*}
+        P_P = \left\lbrace \frac{a}{b}: a\in P, b\notin P \right\rbrace,
+    \end{equation*}
+    which is also left as an exercise.
+
+    \np We know that
+    \begin{equation*}
+        R\text{ is an integral domain} \implies R_P \text{ is local}.
+    \end{equation*}
+    Well, Dedekind domains are \textit{much better} than integral domain, so it must be the case that
+    \begin{equation*}
+        R\text{ is a Dedekind domain} \implies R_P \text{ is local} + \text{???}.
+    \end{equation*}
+
+    \subsection{Discrete Valuation Rings (DVRs)}
+    
+    \begin{definition}{\textbf{Discrete Valuation Ring (DVR)}}
+        A \emph{DVR} is an integral doamin which is
+        \begin{enumerate}
+            \item not a field;
+            \item Noetherian;
+            \item local; and
+            \item such that the unique maximal ideal is principal.
+        \end{enumerate}
+        A generator $\pi$ for the unique maximal ideal is called a \emph{uniformizer}.
+    \end{definition}
+    
+    \np Here's another goal:
+    \begin{equation}
+        \text{$R$ is Dedekind and $P$ is a nontrivial proper ideal of $R$} \implies R_P\text{ is a DVR}.
+    \end{equation}
+    And indeed, [3.8] is why DVR's are created.
+
+    \np We are ruling out the case $P = \left\lbrace 0 \right\rbrace$, since $P = \left\lbrace 0 \right\rbrace$ implies $R_P$ is the field of fractions of $R$, so not a DVR.
+
+    \clearpage
+    
+    \begin{lemma}{Nakayama}
+        Let $R$ be a ring and let $I$ be a nonzero proper ideal of $R$. Let $M$ be a finitely generated $R$-module with $IM=M$. Then there exists $a\in R$ such that
+        \begin{enumerate}
+            \item $a+I=1+I$; and
+            \item $aM = 0$.
+        \end{enumerate}
+    \end{lemma}
+
+    \begin{proof}
+        Since $M$ is finitely generated,
+        \begin{equation*}
+            M = Rx_1 + \cdots + Rx_n
+        \end{equation*}
+        for some $x_1,\ldots,x_n\in M$. But $IM = M$, so that we may write
+        \begin{equation*}
+            x_i = a_{i,1}x_1 + \cdots + a_{i,n}x_n
+        \end{equation*}
+        for some $a_{i,1},\ldots,a_{i,n}\in I$. Consider the matrix
+        \begin{equation*}
+            A = \left[ a_{i,j} \right]^n_{i,j=1}\in I^{n\times n}.
+        \end{equation*}
+        Let
+        \begin{equation*}
+            v = \begin{bmatrix} x_1 \\ \vdots \\ x_n \end{bmatrix}.
+        \end{equation*}
+        Then by construction
+        \begin{equation*}
+            Av=v.
+        \end{equation*}
+        Also, consider
+        \begin{equation*}
+            f = \det\left( xI_n-A \right).
+        \end{equation*}
+        Then by the Cayley-Hamilton theorem, we have
+        \begin{equation*}
+            f\left( A \right) = 0.
+        \end{equation*}
+        Writing $f$ explicitly,
+        \begin{equation*}
+            f = x^n + c_{n-1}x^{n-1} + \cdots + c_1x + c_0,
+        \end{equation*}
+        where each $c_i\in I$. Hence
+        \begin{equation*}
+            0 = f\left( A \right)v = \left( A^n+c_{n-1}A^{n-1}\cdots+c_1A+c_0I_n \right)v = v + c_{n-1}v + \cdots c_1v + c_0v = f\left( 1 \right)v.
+        \end{equation*}
+        So let $a = f\left( 1 \right)$.
+
+        Now,
+        \begin{equation*}
+            av = 0 \implies ax_i = 0 \implies aM = a\left( Rx_1+\cdots+R_n \right) = 0.
+        \end{equation*}
+        Also,
+        \begin{equation*}
+            a = f\left( 1 \right) = 1+c_{n-1}+\cdots+c_1+c_0 \equiv 1 \mod I,
+        \end{equation*}
+        since each $c_i\in I$.
+    \end{proof}
+    
+    \begin{prop}{}
+        Let $R$ be a DVR and $M = \left< \pi \right>$ be the unique maximal ideal of $R$. Then every nonzero proper ideal $I$ of $R$ is of the form
+        \begin{equation*}
+            I = M^n
+        \end{equation*}
+        for some $n\in\N$.
+    \end{prop}
+    
+    \begin{proof}
+        Let $I$ be a nonzero proper ideal and let $J = \frac{1}{\pi}R$. Then
+        \begin{equation*}
+            JM = R.
+        \end{equation*}
+        Then
+        \begin{equation*}
+            I = IR = \underbrace{IJ}_{\clap{\text{\footnotesize$=I_1$}}} M.
+        \end{equation*}
+        But $I\subseteq M = \left< \pi \right>$, so that $I_1\subseteq R$. Hence
+        \begin{equation*}
+            I = I_1M \subseteq I_1.
+        \end{equation*}
+
+        Suppose $I=I_1$. Then $I = IM$. Also $I$ is finitely generated, since $R$ is a DVR so is Noetherian. Hence by Nakayama's lemma (with the roles of $I,M$ switched) there is $a\in R$ such that $a-1\in M$ and $aI = 0$. Since $R$ is an integral domain,
+        \begin{equation*}
+            a = 0 \implies -1 \in M \implies M = R.
+        \end{equation*}
+        This is a contradiction. Hence $I$ is a proper subset of $I_1$.
+
+        If $I_1=R$, then $I=M$, and we are done. Suppose $I_1\neq R$. Then
+        \begin{equation*}
+            I_1 = I_1R = \underbrace{I_1J}_{\clap{\text{\footnotesize$=I_2$}}}M \subseteq I_2.
+        \end{equation*}
+        Similarly, we have that $I_1\neq I_2$ due to Nakayama's lemma. 
+
+        If $I_2 = R$, then
+        \begin{equation*}
+            I_1 = M \implies I = I_1M = M^{2}
+        \end{equation*}
+        and we are done. If not, we continue the process to obtain an ascending chain of ideals $\left( I_{n} \right)^{\infty}_{n=1}$. Since $R$ is Noetherian, this chain stabilizes, so that we have $n\in\N$ such that $I_n = M$. This means $I$ is a power of $M$, as required.
+    \end{proof}
+    
+    \np Observe that, by Proposition 3.16, every ideal of a DVR is principal. As a consequence, we are going to prove
+    \begin{equation*}
+        \text{DVR} \iff \text{local PID not a field}.
+    \end{equation*}
+    
+    \np Let $R$ be a DVR and let $M = \left< \pi \right>$ be the unique maximal ideal of $R$. Let $x\in R$ be nonzero. We can classify $x$ into two cases.
+    \begin{enumerate}
+        \item $x\in R^\times$.
+        \item $x\notin R^{\times}$, so that $\left< x \right>$ is a proper nonzero ideal. So by Proposition 3.16, $\left< x \right> = \left< \pi^n \right>$. This means $x,\pi$ are \textit{associates}: $x = u\pi^n$ for some unit $u\in R^{\times}$. This makes every element of $R$ look \textit{quite uniform}, which is why we call $\pi$ a \textit{uniformizer}.
+    \end{enumerate}
+    
+    \begin{prop}{}
+        Let $R$ be a Noetherian integral domain and let $P$ be a nonzero prime ideal of $R$. Then $R_P$ is Noetherian.
+    \end{prop}
+
+    \begin{proof}
+        Let $I\subseteq R_P$ be an ideal and let $J = I\cap R$ be an ideal of $R$. Then $J$ is a finitely generated $R$-module, so that
+        \begin{equation*}
+            J = Rx_1 + \cdots + Rx_n
+        \end{equation*}
+        for some $x_1,\ldots,x_n\in R$. Let $x\in I$ with $x=\frac{a}{b}$ for some $a,b\in R$ with $b\notin P$. This means
+        \begin{equation*}
+            a = bx \in I\cap R = J.
+        \end{equation*}
+        Thus
+        \begin{equation*}
+            a = r_1x_1 + \cdots + r_nx_n \implies x = \frac{a}{b} = \frac{r_1}{b}x_1 + \cdots + \frac{r_n}{b}x_n \implies I = R_Px_1 + \cdots + R_Px_n.
+        \end{equation*}
+    \end{proof}
+    
+    \begin{theorem}{}
+        Let $R$ be a Dedekind domain and let $P$ be a nonzero prime ideal. Then $R_P$ is a DVR.
+    \end{theorem}
+
+    \begin{proof}
+        Since $P$ is a nonzero ideal, we know $R_P$ is not a field. Also, since $R$ is a Dedekind domain, $R$ is Noetherian, so $R_P$ is Noetherian. Moreover, $R_P$ is local as a localization of a ring. Hence it remains to show that the unique maximal ideal of $R_P$, namely $P_P$ (i.e. the ideal of non-units of $R_P$) is principal.
+
+        Recall that there exists an ideal $I$ such that
+        \begin{equation*}
+            IP = \left< \alpha \right> 
+        \end{equation*}
+        for some $\alpha\in P$. Consider $J = \frac{1}{\alpha}I$. Note
+        \begin{equation*}
+            JP = \frac{1}{\alpha}IP = \frac{1}{\alpha}\left< \alpha \right> = R. 
+        \end{equation*}
+        Say
+        \begin{equation*}
+            1 = a_1b_1+\cdots+a_nb_n,
+        \end{equation*}
+        where each $a_i\in J, b_i\in P$. Take $i$ such that $a_ib_i\notin P$ (such $i$ exists, since otherwise $1\in P$ where $P$ is a prime ideal). This means
+        \begin{equation*}
+            \frac{1}{a_ib_i}\in R_P.
+        \end{equation*}
+        Let $x\in P_P$. Then $y=\frac{x}{a_ib_i}\in P_P$, since $x\in P_P$. Moreover
+        \begin{equation*}
+            x = a_ib_i y.
+        \end{equation*}
+        Say
+        \begin{equation*}
+            y = \frac{u}{v}
+        \end{equation*}
+        for some $u\in P, v\in R\setminus P$. Then
+        \begin{equation*}
+            x = b_i \frac{a_iu}{v}.
+        \end{equation*}
+        But $a_i\in J, u\in P$ so that $a_iu\in JP=R$. Hence $\frac{a_iu}{v}\in R_P$, which means
+        \begin{equation*}
+            x\in \left< \frac{b_i}{1} \right>\subseteq R_P. 
+        \end{equation*}
+        Since $x$ was arbitrary, it follows
+        \begin{equation*}
+            P_P = \left< \frac{b_i}{1} \right>, 
+        \end{equation*}
+        as required.
+    \end{proof}
+
+    \np Theorem 3.18 does two awesome things for us.
+    \begin{enumerate}
+        \item It proves the multiplicativitiy of ideal norm.
+        \item It gives a powerful way to prove whether a ring of integers is of the form $\Z\left[ \alpha \right]$.
+    \end{enumerate}
+    
+    \subsection{Multiplicativity of the Ideal Norm}
+    
+    \begin{prop}{}
+        Let $R$ be an integral domain and let $P$ be a nonzero prime ideal. Then for all $n\in\N$,
+        \begin{equation*}
+            R /P^n \iso R_P /P_P^n.
+        \end{equation*}
+    \end{prop}
+
+    \begin{proof}[Proof Sketch]
+        The isomorphism is given by
+        \begin{equation*}
+            r+P^n \mapsto \frac{r}{1} + P_P^n.
+        \end{equation*}
+    \end{proof}
+
+    \clearpage
+    
+    \begin{boxyrecall}{}
+        Let $R$ be an integral domain and suppose an ideal $I\subseteq R$ is such that
+        \begin{equation*}
+            I = P_1^{n_1}\cdots P_k^{n_k}
+        \end{equation*}
+        for some pairwise coprime prime ideals $P_1,\ldots,P_k$ of $R$. Then by the CRT,
+        \begin{equation*}
+            R /I \iso R /P_1^{n_1}\times\cdots\times R /P_k^{n_k}.
+        \end{equation*}
+        If $R = \mO_K$ for some number field $K$, then
+        \begin{equation*}
+            N\left( I \right) = N\left( P_1^{n_1} \right)\cdots N\left( P_k^{n_k} \right).
+        \end{equation*}
+        Hence it suffices to show
+        \begin{equation*}
+            N\left( P^n \right) = N\left( P \right)^n
+        \end{equation*}
+        for any prime ideal $P\subseteq R$ and $n\in\N$.
+    \end{boxyrecall}
+    
+    \begin{prop}{}
+        Let $R$ be a DVR and let $P$ be a maximal ideal of $R$. If $R /P$ is finite, then
+        \begin{equation*}
+            \left| R /P^n \right| = \left| R /P \right|^n
+        \end{equation*}
+        for all $n\in\N$.
+    \end{prop}
+
+    \begin{proof}
+        We use induction on $n$. 
+
+        Suppose
+        \begin{equation*}
+            \left| R /P^{n-1} \right| = \left| R /P \right|^{n-1}
+        \end{equation*}
+        for some $n>1$. Consider
+        \begin{equation*}
+            \begin{aligned}
+                \phi:R /P^{n}&\to R /P^{n-1} \\
+                r+P^{n} &\mapsto r+P^{n-1}
+            \end{aligned} .
+        \end{equation*}
+        Since $P^{n}\subseteq P^{n-1}$, $\phi$ is well-defined. Clearly $\phi$ is an epimorphism. Moreover,
+        \begin{equation*}
+            \ker\left( \phi \right) = P^{n-1} /P^n
+        \end{equation*}
+        By the first isomorphism theorem on $\phi$ (or the third isomorphism theorem alternatively),
+        \begin{equation*}
+            \left( R /P^n \right) / \left( P^{n-1} /P^n \right) \iso R /P^n.
+        \end{equation*}
+        This implies
+        \begin{equation*}
+            \left| R /P^n \right| = \left| P^{n-1} /P^n \right|\left| R /P \right|^n.
+        \end{equation*}
+        Hence it remains to show $\left| P^{n-1} /P^n \right| = \left| R /P \right|$.
+
+        Since $P$ is a maximal ideal, $F = R /P$ is a field. Consider $V = P^{n-1} /P^n$ as a $F$-vector space with the scalar multiplication
+        \begin{equation*}
+            \left( r+P \right)\left( a+P^n \right) = ra+P^n.
+        \end{equation*}
+        Say $P = \left< \pi \right>$. Let $x\in V$. Then
+        \begin{equation*}
+            x = a+P^n
+        \end{equation*}
+        for some $a\in P^{n-1}$. That is, $a \in\left< \pi^{n-1} \right>$, so that $a=c\pi^{n-1}$ for some $c\in R$. Hence
+        \begin{equation*}
+            x = a+P^n = c\pi^{n-1}+P^n = \left( c+P \right)\left( \pi^{n-1}+P^n \right).
+        \end{equation*}
+        Since $x$ was arbitrary, it follows $\pi^{n-1}+P^n$ spans $V$, so that $\dim_F\left( V \right) = 1$. That is, $V\iso F$ as $F$-vector spaces. Thus
+        \begin{equation*}
+            \left| P^{n-1} /P^n \right| = \left| V \right| = \left| F \right| = \left| R /P \right|.
+        \end{equation*}
+    \end{proof}
+    
+    \clearpage
+
+    \begin{theorem}{Multiplicativity of the Ideal Norm}
+        Let $R = \mO_K$ for some number field $K$. If $I,J$ are nonzero ideals of $R$, then
+        \begin{equation*}
+            N\left( IJ \right) = N\left( I \right)N\left( J \right).
+        \end{equation*}
+    \end{theorem}
+    
+    \begin{proof}
+        Let $P$ be a nonzero prime ideal of $R$. It suffices to show
+        \begin{equation*}
+            N\left( P^n \right) = N\left( P \right)^n.
+        \end{equation*}
+        But:
+        \begin{equation*}
+            N\left( P^n \right) = \left| R /P^n \right| = \left| R_P /P_P^n \right| = \left| R_P /P_P \right|^n = \left| R /P \right|^n = N\left( P \right)^n.
+        \end{equation*}
+    \end{proof}
     
     
     
