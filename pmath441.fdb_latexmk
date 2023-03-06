@@ -1,8 +1,8 @@
 # Fdb version 3
-["pdflatex"] 1677510873 "pmath441.tex" "pmath441.pdf" "pmath441" 1677510875
+["pdflatex"] 1678116050 "pmath441.tex" "pmath441.pdf" "pmath441" 1678116051
   "/etc/texmf/web2c/texmf.cnf" 1666737144 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/snochi/texmf/tex/latex/commonstuff/infimum.sty" 1677005010 12953 424e5edceacac8b9a49decadbc49ade8 ""
-  "/home/snochi/texmf/tex/latex/commonstuff/solmathsym.sty" 1676074073 13238 6595e532314941f8865adc1864142fd6 ""
+  "/home/snochi/texmf/tex/latex/commonstuff/infimum.sty" 1678116006 13053 3be256ba021b8b31402a9664e992673e ""
+  "/home/snochi/texmf/tex/latex/commonstuff/solmathsym.sty" 1678113697 14328 4a03e70060772995447cdebf918191fd ""
   "/home/snochi/texmf/tex/latex/commonstuff/solphyssym.sty" 1666736388 1412 71089ecbe5be1c75e1938cf1f4e8c5d4 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/adobe/zapfding/pzdr.tfm" 1136768653 1528 f853c4d1b4e0550255e02831fdc8496f ""
@@ -186,12 +186,12 @@
   "/var/lib/texmf/web2c/xetex/xelatex.fmt" 1666745470 3335538 cd0e1f5b44f1209f5ba2e1b0558a4c44 ""
   "1.tex" 1676014596 46290 27396a98295b17ab143c97c02de7fede ""
   "2.tex" 1676009106 19199 edd2c2ddb85b33ca339efdefaae04224 ""
-  "3.tex" 1677510873 58160 0aaf10069c1e55b2651f2b07af2f95a4 ""
-  "pmath441.aux" 1677510875 2801 a081eba8ecadcd087c8a044dddb3601c "pdflatex"
-  "pmath441.out" 1677510875 1259 b4681a3ca94306c5287573b665444cd6 "pdflatex"
-  "pmath441.tex" 1676559665 291 3b2986faed8dde3fbaaf8736a65cf6d9 ""
+  "3.tex" 1678116049 76509 5c196d081f6deda70012f9e9bc68d9f4 ""
+  "pmath441.aux" 1678116051 2935 6d0a2fdc37e6c17a31a47a2e096e9d94 "pdflatex"
+  "pmath441.out" 1678116051 1346 69defc3995a4af27db9ff7acb9ce5734 "pdflatex"
+  "pmath441.tex" 1677703836 291 3b2986faed8dde3fbaaf8736a65cf6d9 ""
   (generated)
-  "pmath441.out"
-  "pmath441.aux"
-  "pmath441.pdf"
   "pmath441.log"
+  "pmath441.out"
+  "pmath441.pdf"
+  "pmath441.aux"

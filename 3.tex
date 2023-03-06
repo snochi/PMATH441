@@ -1188,6 +1188,407 @@
         \end{equation*}
     \end{proof}
     
+    \subsection{Further Application of DVR's}
+
+    \begin{theorem}{DVR Characterization}
+        Let $R=\mO_K$ and let $S\subseteq R$ be a subring such that $\left[ R:S \right] = n < \infty$ (index as an additive subgroup).
+        \begin{enumerate}
+            \item $S=R$ if and only if $S_P$ is a DVR for all nonzero prime ideal $P\subseteq S$.
+            \item Let $P\subseteq S$ be a prime ideal and let $p\in P$ be a prime number.\footnotemark[1] If $p\nmid n$, then $S_P$ is a DVR.
+        \end{enumerate}
+        
+        \noindent
+        \begin{minipage}{\textwidth}
+            \footnotetext[1]{Again, such a prime exists due to Lagrange.}
+        \end{minipage}
+    \end{theorem}
+
+    \rruleline
+
+    \np (a) itself alone is not practical, since it is difficult to prove $S_P$ is a DVR for all prime $P\subseteq S$. (b) simplifies things a lot.
+
+    \np Note that (b) is a \textit{huge} generalization of
+    \begin{equation*}
+        \text{squarefree $\disc\left( \alpha \right)$} \implies \mO_{\Q\left( \alpha \right)}=\Z\left[ \alpha \right].
+    \end{equation*}
+    Here is an explanation.
+
+    Consider the case
+    \begin{equation}
+        K = \Q\left( \alpha \right), \alpha\in\mO_K=R, S=\Z\left[ \alpha \right], \rank\left( R \right)=\rank\left( S \right)=\left[ K:\Q \right].
+    \end{equation}
+    By Assignment 2, we know
+    \begin{equation*}
+        \left[ R:S \right] < \infty.
+    \end{equation*}
+    Moreover,
+    \begin{equation*}
+        \disc\left( \alpha \right) = \left[ R:S \right]^{2}\disc\left( K \right).
+    \end{equation*}
+    Therefore, 
+    \begin{equation*}
+        p^{2}\nmid\disc\left( \alpha \right) \implies p\nmid\left[ R:S \right].
+    \end{equation*}
+    Hence, when $\disc\left( \alpha \right)$ is squarefree in particular, the above implication always holds, so by Theorem 3.22 $S_P$ is a DVR for any prime $P\subseteq S$.
+    
+    \np But \textit{sometimes} (and by sometimes we mean \textit{always}) we have $p\in P$ such that $p|n$. What should we do in that case?
+
+    \begin{prop}{}
+        Let $\alpha\in\A$, let $f\in\Z\left[ x \right]$ be the minimal polynomial for $\alpha$, and let $p\in\Z$ be prime. Say
+        \begin{equation*}
+            f = p_1^{n_1}\cdots p_k^{n_k}
+        \end{equation*}
+        is the irreducible factorization of $f$ in $\Z_p\left[ x \right]$. Then the prime ideals of $\Z\left[ \alpha \right]$ which has $p$ are exactly $\left< p_i\left( \alpha \right),p \right>$. 
+    \end{prop}
+
+    \placeqed[Assignment 6]
+
+    \clearpage
+    
+    \np Proposition 3.23 does not say
+    \begin{equation*}
+        \left< p \right> = \left< p_1\left( \alpha \right),p \right>^{n_1}\cdots\left< p_k\left( \alpha \right),p \right>^{n_k}.   
+    \end{equation*}
+    A counterexample is when $\alpha=\sqrt{5}$.
+
+    \np Again, consider the case in [3.9]. Let $P\subseteq S$ be a nonzero prime ideal. Then
+    \begin{equation*}
+        \Z\left[ \alpha \right] \iso \Z\left[ x \right] /\left< f \right>,
+    \end{equation*}
+    where $f$ is the minimal polynomial for $\alpha$. Now, $\Z\left[ x \right]$ is Noetherian due to \textit{Hilbert's basis theorem},\footnote{Another stolen fact from commutative algebra!} and quotients of a Noetherian ring is Noetherian. Hence $\Z\left[ \alpha \right]$ is Noetherian, so that $S_P$ is local, Noetherian, and not a field.
+
+    Hence in practice, we need only check that $P_P$ is principal.
+
+    \begin{example}{}
+        Let $f = x^{4}-5x^{2}+7$, which is irreducible over $\Q$. Then $\disc\left( f \right) = 1008 = 2^{4}3^{2}7^1$. Let $\alpha\in\CC$ be a root of $f$ and let $K=\Q\left( \alpha \right)$. Let $R=\mO_K$ and let $S=\Z\left[ \alpha \right]$. Prove $S=R$.
+    \end{example}
+
+    \begin{proof}
+        It suffices to show that every prime ideal which has $2$ or $3$ is a DVR.
+
+        \begin{case}
+            $p=2$.
+
+            Observe
+            \begin{equation*}
+                f = x^{4}+x^{2}+1 = \left( x^{2}+x+1 \right)^{2}
+            \end{equation*}
+            over $\Z_2$. Hence the only prime ideal of $S$ which has $2$ is $P=\left< \alpha^{2}+\alpha+1,2 \right>$. By the above comment, it suffices to check $P_P$ is a principal ideal of $S_P$.
+
+            Dividing $f$ by $x^{2}+x+1$ over $\Z$, we obtain
+            \begin{equation*}
+                f = \left( x^{2}-x-5 \right)\left( x^{2}+x+1 \right) + \left( 6x+12 \right).
+            \end{equation*}
+            This means
+            \begin{equation*}
+                0 = f\left( \alpha \right) = \left( \alpha^{2}+\alpha+1 \right)\left( \alpha^{2}-\alpha-5 \right) + \left( 6\alpha+12 \right) \implies 6\alpha+12\in P.\footnotemark[1]
+            \end{equation*}
+            Dividing by $2$,
+            \begin{equation*}
+                2\left( 3\alpha+6 \right)\in \left( \alpha^{2}+\alpha+1 \right)S.
+            \end{equation*}
+
+            Suppose for contradiction $3\alpha+6\in P$. Then
+            \begin{equation*}
+                3\alpha+6\in P \implies 3\alpha\in P\implies \alpha\in P\implies 1\in P,
+            \end{equation*}
+            since $\alpha$ divides $\alpha^{2}+\alpha$. Since $P$ is prime, this is a contradiction.
+
+            Hence
+            \begin{equation*}
+                -2\left( 3\alpha+6 \right) = \left( \alpha^{2}+\alpha+1 \right)\left( \alpha^{2}-\alpha-5 \right) \implies 2 = \frac{-1}{3\alpha+6}\left( \alpha^{2}+\alpha+1 \right)\left( \alpha^{2}-\alpha-5 \right)
+            \end{equation*}
+            in $S_P$, so that
+            \begin{equation*}
+                2 \in \left( \alpha^{2}+\alpha+1 \right)S_P \implies P_P = 2S_P + \left( \alpha^{2}+\alpha+1 \right)S_P = \left( \alpha^{2}+\alpha+1 \right)S_P.
+            \end{equation*}
+            Thus $S_P$ is principal.
+        \end{case}
+
+        \begin{case}
+            $p=3$. 
+
+            Observe
+            \begin{equation*}
+                f = x^{4}+x^{2}+1 = \left( x+1 \right)^{2}\left( x+2 \right)^{2}
+            \end{equation*}
+            over $\Z_3$. Hence the prime ideals of $S$ which has $3$ are $\left< \alpha+1,3 \right>,\left< \alpha+2,3 \right>$. Over $\Z$, we have
+            \begin{equation*}
+                f\left( -2 \right) = f\left( -1 \right) = 3.
+            \end{equation*}
+            Using the remainder theorem, this means
+            \begin{equation*}
+                f = \left( x+1 \right)q_1+f\left( -1 \right) = \left( x+1 \right)q_1+3 \implies 0 = f\left( \alpha \right) = \left( \alpha+1 \right)q_1\left( \alpha \right)+3 \implies 3\in\left< \alpha+1 \right>. 
+            \end{equation*}
+            Similarly $x\in\left< \alpha+2 \right>$. Hence $P_1 = \left( \alpha+1 \right)S, P_2=\left( \alpha+2 \right)S$. Thus
+            \begin{equation*}
+                \begin{aligned}
+                    {P_1}_{P_1} & = \left( \alpha+1 \right)S_{P_1}, \\
+                    {P_2}_{P_2} & = \left( \alpha+2 \right)S_{P_2}, \\
+                \end{aligned} 
+            \end{equation*}
+            so that $S_{P_1},S_{P_2}$ are DVR's.
+        \end{case}
+        
+        \noindent
+        \begin{minipage}{\textwidth}
+            \footnotetext[1]{Of course, we can \textit{easily} see $6\alpha+12\in P$ since $2$ divides it. However, how are we supposed to know it is the \textit{right} multiple of $2$ to look at without this computation?}
+        \end{minipage}
+    \end{proof}
+
+    \np To practive calculations, visit \texttt{lmfdb.org}.
+    
+    \begin{boxyrecall}{}
+        Let $R$ be a DVR and let $M=\left< \pi \right>$ be the unique maximal ideal of $R$. Let $K$ be the field of fractions of $R$ and let $x\in R$ be nonzero and nonunit. That is, $\left< x \right>$ is a proper ideal of $R$. Then we know for some $m\in\N$
+        \begin{equation}
+            \left< x \right> = \left< \pi \right>^m = \left< \pi^m \right>. 
+        \end{equation}
+        In other words, [3.10] is the unique way of factoring any nonzero proper ideal of $R$.
+
+        Moreover, it follows from [3.10] that
+        \begin{equation*}
+            x = u\pi^m
+        \end{equation*}
+        for some $u\in R^{\times}$. This is why we called $\pi$ a \textit{uniformizer}. 
+    \end{boxyrecall}
+
+    Therefore, for any $y\in K$, there are $m\in\Z,u\in R^{\times}$ such that
+    \begin{equation}
+        y = u\pi^m \implies y\in R \text{ or } \frac{1}{y} = u^{-1}\pi^{-m}\in R.
+    \end{equation}
+
+    \begin{example}{}
+        Consider $f=x^{3}+2x-8\in\Q\left[ x \right]$ which is irreducible over $\Q$ with $\disc\left( f \right) = -1760 = -2^55^111^1$. Let $\alpha\in\CC$ be a root of $f$, $K=\Q\left( \alpha \right), R=\mO_K, S=\Z\left[ \alpha \right]$. Then $R\neq S$.
+    \end{example}
+
+    \begin{proof}
+        Observe that
+        \begin{equation*}
+            f = x^{3}
+        \end{equation*}
+        over $\Z_2$, so that $P = \left< \alpha,2 \right>$ is the unique prime ideal of $S$ which has $2$. 
+
+        To show $R\neq S$, it suffices to show that $S_P$ is not a DVR. As always, proving this is equivalent to showing $P_P$ is not principal. Suppose $P_P$ is principal, say $P_P = \left< \pi \right>$ for some $\pi\in S_P$, for contradiction. Then we have
+        \begin{equation*}
+            \alpha = u_1\pi^n, 2=u_2\pi^m
+        \end{equation*}
+        for some $u_1,u_2\in R^{\times}$ and $n,m\in\N$. By [3.11], this means $\frac{\alpha}{2}\in S_P$ or $\frac{2}{\alpha}\in S_P$.
+
+        \begin{case}
+            \textit{Suppose $\frac{\alpha}{2}\in S_P$.}
+
+            This means
+            \begin{equation*}
+                \frac{\alpha}{2} = \frac{a+b\alpha+c\alpha^{2}}{d+e\alpha+k\alpha^{2}}
+            \end{equation*}
+            for some $a,b,c,d,e,k\in\Z$, where $d+e\alpha+k\alpha^{2}\notin P$. So
+            \begin{equation*}
+                d\alpha+e\alpha^{2}+k\left( -2\alpha+8 \right) = 2a+2b\alpha+2c\alpha^{2}
+            \end{equation*}
+            using relation $f\left( \alpha \right) = 0$. Since $1,\alpha,\alpha^{2}$ form a basis, it follows
+            \begin{equation*}
+                d-2k = 2b
+            \end{equation*}
+            using the coefficients of $\alpha$. This means
+            \begin{equation*}
+                d = 2k+2b\in P,
+            \end{equation*}
+            so that $d+e\alpha+k\alpha^{2}\in P$, which is a contradiction.
+        \end{case}
+
+        \begin{case}
+            \textit{Suppose $\frac{2}{\alpha\in S_P}$.}
+
+            This means 
+            \begin{equation*}
+                \frac{2}{\alpha} = \frac{a+b\alpha+c\alpha^{2}}{d+e\alpha+k\alpha^{2}}
+            \end{equation*}
+            for some $a,b,c,d,e,k\in\Z$, where $d+e\alpha+k\alpha^{2}\notin P$. So
+            \begin{equation*}
+                2d+2e\alpha+2k\alpha^{2} = a\alpha+b\alpha^{2}+c\left( -2\alpha+8 \right) \implies 2d = 8c \implies d = 4c\in P \implies d+e\alpha+k\alpha^{2}\in P,
+            \end{equation*}
+            which is a contraidction.
+        \end{case}
+    \end{proof}
+
+    \begin{example}{}
+        Consider $f=x^{3}-x^{2}+5x+1\in\Q\left[ x \right]$ which is irreducible over $\Q$ with $\disc\left( f \right) = -2^{2}3^17^2$. Let $\alpha\in\CC$ be a root of $f$, $K=\Q\left( \alpha \right),R=\mO_K,S=\Z\left[ \alpha \right]$. Is $R=S$?
+    \end{example}
+
+    \begin{answer}
+        Observe
+        \begin{equation*}
+            f = \left( x+1 \right)^{3}
+        \end{equation*}
+        over $\Z_2$, so $P=\left< \alpha+1,2 \right>$ is the unique maximal ideal of $S$ which has $2$.
+
+        Over $\Z$, we have
+        \begin{equation*}
+            f\left( -1 \right) = -6 \implies f = \left( x+1 \right)q-6
+        \end{equation*}
+        for some $q\in\Z\left[ x \right]$, so that
+        \begin{equation*}
+            0 = \left( \alpha+1 \right)q\left( \alpha \right)-6 \implies 6\in\left< \alpha+1 \right>. 
+        \end{equation*}
+        Since $3\notin P$,\footnote{$2\in P$ implies $p\notin P$ for any prime $p\in\N$, since otherwise $1\in P$ so $P$ blows up to $S$.} we have
+        \begin{equation*}
+            2 = \frac{1}{3}6 \in \left( \alpha+1 \right)S_P \implies P_P = \left( \alpha+1 \right)S_P.
+        \end{equation*}
+
+        Moreover, over $\Z_7$,
+
+        \begin{equation*}
+            f = \left( x+2 \right)^{3},
+        \end{equation*}
+        so that $Q= \left< \alpha+2,7 \right>$ is the unique prime ideal of $S$ which has $7$. Over $\Z$,
+        \begin{equation*}
+            f\left( -2 \right) = -21 \implies 21\in\left< \alpha+2 \right>\subseteq S \implies 7 = \frac{1}{3} 21\in\left( \alpha+2 \right)S_Q \implies Q_Q = \left( \alpha+2 \right)S_Q.
+        \end{equation*}
+        Hence $P_P$ is principal for any prime $P\subseteq S$, which means $R=S$.
+    \end{answer}
+
+    \clearpage
+    
+    \np We shall prove Theorem 3.22 now:
+
+    \setcounter{stcounter}{21}
+    \begin{theorem}{DVR Characterization}
+        Let $R=\mO_K$ and let $S\subseteq R$ be a subring such that $\left[ R:S \right] = n < \infty$ (index as an additive subgroup).
+        \begin{enumerate}
+            \item $S=R$ if and only if $S_P$ is a DVR for all nonzero prime ideal $P\subseteq S$.
+            \item Let $P\subseteq S$ be a prime ideal and let $p\in P$ be a prime number.\footnotemark[1] If $p\nmid n$, then $S_P$ is a DVR.
+        \end{enumerate}
+        
+        \noindent
+        \begin{minipage}{\textwidth}
+            \footnotetext[1]{Again, such a prime exists due to Lagrange.}
+        \end{minipage}
+    \end{theorem}
+    \setcounter{stcounter}{23}
+    
+    \rruleline
+    
+    \np Here is a little remark on the assumption $\left[ R:S \right] = n < \infty$. Recall that
+    \begin{equation*}
+        K = \frc\left( R \right).
+    \end{equation*}
+    For all $r\in R$, observe
+    \begin{equation*}
+        nr+S = n\left( r+S \right) = 0+S
+    \end{equation*}
+    in $R /S$, so that $nr\in S$. This means, given any $\frac{a}{b}\in K$,
+    \begin{equation*}
+        \frac{a}{b} = \frac{na}{nb}\in\frc\left( S \right),
+    \end{equation*}
+    so that
+    \begin{equation*}
+        \frc\left( R \right) = K = \frc\left( S \right).
+    \end{equation*}
+
+    It follows that, if $P\subseteq S$ is a prime ideal, then
+    \begin{equation*}
+        \frc\left( S_P \right) = K.
+    \end{equation*}
+
+    \begin{lemma}{Lying-over Theorem}
+        Let $S,R$ be integral domains with $S\subseteq R$ and suppose $R$ is integral over $S$. Let $P\subseteq S$ be a prime ideal. Then there is a prime ideal $Q\subseteq R$ such that $P=S\cap Q$.
+    \end{lemma}
+    
+    \begin{proof}[Proof Sketch]
+        Consider
+        \begin{equation*}
+            R_P = \left\lbrace \frac{a}{b}: a\in R, b\in S\setminus P \right\rbrace.
+        \end{equation*}
+
+        \begin{claim}
+            \textit{$R_P$ is a local ring.}
+
+            Exercise!
+        \end{claim}
+
+        Clearly, $S_P\subseteq R_P$. Moreover, using the fintely generated module trick, we can show $R_P$ is integral over $S_P$. Let $M\subseteq R_P$ be the unique maximal ideal of $R_P$ and let $Q = M\cap R$. By Assignment 1, $Q$ is prime. Moreover,
+        \begin{equation*}
+            Q\cap S = \left( M\cap R \right)\cap S = \left( M\cap S_P \right)\cap S.
+        \end{equation*}
+        By Assignment 1, it follows $M\cap S_P$ is maximal. That is, $M\cap S_P = P_P$, since $S_P$ is a local ring. Hence
+        \begin{equation*}
+            Q\cap S = P_P\cap S = P,
+        \end{equation*}
+        as required.
+    \end{proof}
+    
+    \begin{boxyproof}{Proof of Theorem 3.22 (a)}
+        It suffices to prove the reverse direction.
+
+        Suppose $S_P$ is a DVR for all nonzero prime ideal $P\subseteq S$. Observe $R=\mO_K$ is integral over $S$, as $S\supseteq\Z$ and $R$ is integral over $\Z$. Let $P$ be a nonzero prime ideal of $S$, so that there is prime $Q\subseteq R$ such that $P=Q\cap S$ by the lying-over theorem.
+
+        \begin{claim}
+            \textit{$S_P = R_Q$.}
+
+            ($\subseteq$) Let $x\in S_P$. This means
+            \begin{equation*}
+                x = \frac{a}{b}
+            \end{equation*}
+            for some $a,b\in S, b\notin P$. That is, $a,b\in R, b\notin Q$ (as $P=Q\cap S$), so that
+            \begin{equation*}
+                x\in R_Q.
+            \end{equation*}
+
+            ($\supseteq$) Let $\alpha\in K\setminus S_P$. Then
+            \begin{equation*}
+                \alpha = u\pi^n,
+            \end{equation*}
+            where $\pi$ is a uniformizer for $S_P$, $u\in S_P^{\times}$ and $n\in\Z$. Since $\alpha\notin S_P$, it follows $n<0$. This means $-1-n\geq 0$, so that
+            \begin{equation*}
+                \pi^{-1} = \underbrace{\pi^{-1-n}}_{\in S_P}\underbrace{\pi^n}_{\in S_P\left[ \alpha \right]} \in S_P\left[ \alpha \right] \implies S_P\left[ \alpha \right] = K.
+            \end{equation*}
+            However, $S_P\subseteq R_Q\subset K$, where the last containment is proper since $Q$ is nonzero. Thus $\alpha\notin R_Q$ (otherwise $R_Q\supseteq S_P\left[ \alpha \right] = K$). 
+        \end{claim}
+
+        Let's \textit{unfix} $P,Q$.
+
+        Let $y\in R$ and consider
+        \begin{equation*}
+            D = \left\lbrace b\in S: by\in S \right\rbrace.
+        \end{equation*}
+        Immediately, $D$ is an ideal of $S$.
+
+        \begin{claim}
+            \textit{$D=S$.}
+
+            Suppose $D\neq S$ and let $P\subseteq S$ be a prime ideal containing $D$. Consider a prime ideal $Q\subseteq R$ with $P=S\cap Q$. From before,
+            \begin{equation*}
+                S_P = R_Q.
+            \end{equation*}
+            If $y=\frac{a}{b}$ with $a,b\in S$, then
+            \begin{equation*}
+                by = a\in S \implies b\in D\subseteq P.
+            \end{equation*}
+            Hence $y\notin S_P=R_Q$. But $y\in R\subseteq R_Q$, this is a contradiction. Hence $D=S$.
+        \end{claim}
+
+        Using $1\in D$,
+        \begin{equation*}
+            y\in R\implies y\in S \implies S=R.
+        \end{equation*}
+        \qedplacedtrue
+    \end{boxyproof}
+
+    \begin{proof}[Proof of 3.22(b)]
+        Let $P\subseteq S$ be a prime ideal and let $p\in P$ be a prime number. Suppose $p\nmid n$.  Since $p\in P$ and $\gcd\left( p,n \right) = 1$, $n\notin P$ by Lagrange's theorem. As before, consider
+        \begin{equation*}
+            P = Q\cap S.
+        \end{equation*}
+        Since $R_Q$ is a DVR, it suffices to prove the following claim.
+
+        \begin{claim}
+            \textit{$S_P=R_Q$.}
+
+            We know $S_P\subseteq R_Q$.
+        \end{claim}
+    \end{proof}
+    
+    
     
     
     
