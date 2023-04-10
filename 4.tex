@@ -1,0 +1,417 @@
+\documentclass[pmath441]{subfiles}
+
+%% ========================================================
+%% document
+
+\begin{document}
+
+    \section{Ideal Class Group}
+    
+    \subsection{Preliminaries}
+
+    \begin{boxyrecall}{Ideal Class Group}
+        Let $K$ be a number field, $R=\mO_K$, and let $X$ be the collection of nonzero ideals of $R$. Then $\sim$ by
+        \begin{equation*}
+            I\sim J \iff \exists a,b\neq 0\left[ aI=bJ \right]
+        \end{equation*}
+        is an equivalence relation. Then
+        \begin{equation*}
+            G_K = \left\lbrace \left[ I \right]:I\in X \right\rbrace
+        \end{equation*}
+        with multiplication
+        \begin{equation*}
+            \left[ I \right]\left[ J \right] = \left[ IJ \right], \hspace{2cm}\forall I,J\in X
+        \end{equation*}
+        is the \emph{ideal class group} of $K$. The identity element is the equivalnce class of nonzero principal ideals.
+    \end{boxyrecall}
+    
+    \begin{definition}{\textbf{Class Number}}
+        Let $K$ be a number field. The \emph{class number} $\cl\left( K \right)$ of $K$ is
+        \begin{equation*}
+            \cl\left( K \right) = \left| G_K \right|.
+        \end{equation*}
+    \end{definition}
+
+    \np Here are some big ideas for $G_K$.
+    \begin{enumerate}
+        \item $G_K$ is a structural information attached to $K$ or $\mO_K$.
+        \item Observe $\cl\left( K \right) = 1$ if and only if $\mO_K$ is a PID. Hence in some sense, $\cl\left( K \right)$ is a measure of \textit{how far away} $\mO_K$ is from being a PID.
+    \end{enumerate}
+    
+    \begin{prop}{}
+        Let $R$ be a Dedekind domain. Then
+        \begin{equation*}
+            R\text{ is a PID} \iff R\text{ is a UFD}.
+        \end{equation*}
+    \end{prop}
+
+    \begin{proof}
+        It suffices to prove the reverse direction, as the forward direction is always true.
+
+        Suppose $R$ is a UFD. Let $I$ be a nonzero proper ideal of $R$. Then we can find an ideal $J\subseteq R$ such that $IJ$ is principal, say $IJ=\left< \alpha \right>$. Say that the prime factorization of $\alpha$ is
+        \begin{equation*}
+            \alpha = p_1^{n_1}\cdots p_k^{n_k},
+        \end{equation*}
+        which exists as $R$ is a UFD. That is,
+        \begin{equation*}
+            IJ = \left< p_1 \right>^{n_1}\cdots\left< p_k \right>^{n_k}  
+        \end{equation*}
+        and each $\left< p_i \right>$ is a prime ideal. It follows, for some indices $i_1,\ldots,i_l$ and $m_1\leq n_{i_1},\ldots,m_l\leq n_{i_l}$,
+        \begin{equation*}
+            I = \left< p_{i_1} \right>^{m_1}\cdots\left< p_{i_l} \right>^{m_l} = \left< p_{i_1}^{m_1}\cdots p_{i_l}^{m_l} \right>.   
+        \end{equation*}
+        Thus $I$ is a principal ideal, as required.
+    \end{proof}
+    
+    \np The next goal is to prove:
+    \begin{equation*}
+        \cl\left( K \right) < \infty
+    \end{equation*}
+    i.e. $G_K$ is a finite group.
+
+    \clearpage
+    
+    \begin{prop}{}
+        Let $K$ be a number field and let $R=\mO_K$. Then there is $\lambda>0$ such that for all nonzero ideal $I\subseteq R$, there exists $\alpha\in I$ such that
+        \begin{equation*}
+            N\left( \left< \alpha \right> \right) \leq \lambda N\left( I \right).
+        \end{equation*}
+        \vspace{-22pt}
+    \end{prop}
+    \rruleline
+
+    \np Okey, we can parse the quantifiers without difficulty. But what does Proposition 4.2 mean?
+
+    \np Given any $\alpha\in I$, $\left< \alpha \right>\subseteq I$. This means $N\left( \alpha \right)\geq N\left( I \right)$, as \textit{modding out} by a smaller ideal gives a larger quotient ring. Proposition 4.2 tells us we have inequality in the other direction, up to a constant $\lambda$ which works \textit{for all} ideal $I$. 
+    
+    \begin{boxyproof}{Proof of Proposition 4.2}
+        Let $n=\left[ K:\Q \right]$, let $\left\lbrace v_1,\ldots,v_n \right\rbrace$ be an integral basis for $\mO_K$ and let $\sigma_1,\ldots,\sigma_n:K\to\CC$ be the embeddings of $K$ in $\CC$. Take $m\in\N$ be the maximum element such that
+        \begin{equation*}
+            m^n\leq N\left( I \right)<\left( m+1 \right)^n.
+        \end{equation*}
+        Consider elements of the form
+        \begin{equation*}
+            m_1v_1+\cdots+m_nv_n,
+        \end{equation*}
+        where each $m_i\in\Z, 0\leq m_i\leq m$. Note that there are $\left( m+1 \right)^n$ such elements. Since $N\left( I \right)<\left( m+1 \right)^n$, it follows there are two such elements are congruent modulo $I$. Subtracting them, we obtain $\alpha\in I$, $\alpha\neq 0$, say
+        \begin{equation*}
+            \alpha = m_1v_1+\cdots+m_nv_n,
+        \end{equation*}
+        where each $0\leq \left| m_i \right|\leq m$. It follows
+        \begin{equation*}
+            N\left( \left< \alpha \right>  \right) = \left| N_{K /\Q}\left( \alpha \right) \right| = \left| \prod^{n}_{i=1}\sigma_i\left( \alpha \right) \right| = \prod^{n}_{i=1} \left| \sigma_i\left( \alpha \right) \right| \leq \prod^{n}_{i=1}\sum^{n}_{j=1}\left| m_j\sigma_i\left( v_j \right) \right| \leq m^n\prod^{n}_{i=1}\sum^{n}_{j=1}\left| \sigma_i\left( v_j \right) \right| \leq \left( \prod^{n}_{i=1}\sum^{n}_{j=1}\left| \sigma_i\left( v_j \right) \right| \right)N\left( I \right).
+        \end{equation*}
+        Since $\prod^{n}_{i=1}\sum^{n}_{j=1}\left| \sigma_i\left( v_j \right) \right|$ does not depend on our choice of $I$, the result follows by choosing
+        \begin{equation*}
+            \lambda = \prod^{n}_{i=1}\sum^{n}_{j=1}\left| \sigma_i\left( v_j \right) \right|.
+        \end{equation*}
+    \end{boxyproof}
+    
+    \begin{prop}{}
+        Let $K$ be a number field, let $R=\mO_K$ and let $\lambda$ be as in Proposition 4.2. Then for all nonzero ideal $I\subseteq R$, there exists an ideal $J\subseteq R$ such that
+        \begin{enumerate}
+            \item $\left[ I \right] = \left[ J \right]$; and
+            \item $N\left( J \right)\leq\lambda$.
+        \end{enumerate}
+    \end{prop}
+
+    \begin{proof}
+        Let $I'\subseteq R$ be an ideal such that
+        \begin{equation*}
+            \left[ I \right]^{-1} = \left[ I' \right].
+        \end{equation*}
+        Let $\alpha\in I$ be such that $N\left( \left< \alpha \right>  \right)\leq\lambda N\left( I \right)$. Then there is an ideal $J\subseteq R$ such that
+        \begin{equation*}
+            I'J = \left< \alpha \right> \implies N\left( I' \right)N\left( J \right) = N\left( \left< \alpha \right>  \right) \leq \lambda N\left( I' \right) \implies N\left( J \right)\leq\lambda. 
+        \end{equation*}
+        Also,
+        \begin{equation*}
+            \left[ I' \right]\left[ J \right] = \left[ \left< \alpha \right>  \right] = \left[ \left< 1 \right>  \right] \implies \left[ J \right] = \left[ I' \right]^{-1} = \left[ I \right].
+        \end{equation*}
+    \end{proof}
+    
+    \begin{cor}{}
+        Let $K$ be a number field. Then $G_K$ is finite.
+    \end{cor}	
+
+    \begin{proof}
+        Let $\left[ I \right]\in G_K$. We may assume $N\left( I \right)\leq\lambda$. Factor $I$ as
+        \begin{equation*}
+            I = P_1^{n_1}\cdots P_k^{n_k},
+        \end{equation*}
+        where each $P_i$ is a prime ideal of $R$. Then $N\left( P_i \right) = p_i^{f_i}$ for some prime $p_i\in\N$. 
+        This means $P_i|\left< p_i \right>$, so that $p_i\leq\lambda$. Since we have an upper bound on the prime number in a prime ideal, it follows there are finitely many prime ideals. Thus due to the prime factorization of $I$, it follows there are finitely many choices for $I$.
+    \end{proof}
+    
+    \np The problem with the above theory is that $\lambda$ is difficult to compute in general and it could be too large.
+    
+    \subsection{Minkowski's Bound}
+    
+    \begin{theorem}{Minkowski}
+        Let $K$ be a number field and let $R=\mO_K$. Then every ideal class of $R$ has $I$ such that
+        \begin{equation*}
+            N\left( I \right) \leq \underbrace{\frac{n!}{n^n} \left( \frac{4}{\pi} \right)^s\sqrt{\left| \disc\left( K \right) \right|}}_{=B_K},
+        \end{equation*}
+        where $s$ is the number of pairs of complex embeddings of $K$ in $\CC$.
+    \end{theorem}
+
+    \placeqed[Assignment 5]
+
+    \np We call $B_K$ the \emph{Minkowski's bound}
+
+    \begin{example}{}
+        Let $K$ be a number field and let $f=x^{3}-2x-2$, which is a $2$-Eisenstein polynomial. It follws that
+        \begin{equation*}
+            \Z\left[ \alpha \right] = \mO_K.
+        \end{equation*}
+        Since $\disc\left( f \right)<0$, $f$ must have a pair of nonreal roots, so that $s=1$. This means
+        \begin{equation*}
+            \frac{n!}{n^n} \left( \frac{4}{\pi} \right)^s\sqrt{\left| \disc\left( K \right) \right|} = \frac{3!}{3^3}\left( \frac{4}{\pi} \right)^1\sqrt{76}.
+        \end{equation*}
+        Hence
+        \begin{equation*}
+            G_K = \left\lbrace \left[ I \right]:N\left( I \right)\leq 2 \right\rbrace,
+        \end{equation*}
+        so $G_K$ is generated by prime ideal $P$ such that $N\left( P \right) = 2$. Modulo 2, $f=x^{3}$ so that
+        \begin{equation*}
+            \left< 2 \right> = \left< \alpha,2 \right>^{3} = \left< \alpha \right>^{3}, 
+        \end{equation*}
+        as $2=\alpha^{3}-2\alpha$. It follows $G_K = \left\lbrace \left[ \left< 1 \right>  \right] \right\rbrace$, the trivial group, so that $\cl\left( K \right) = 1$ and $\mO_K$ is a PID.
+    \end{example}
+    
+    \rruleline
+    
+    \begin{example}{}
+        Consider $K=\Q\left( \sqrt{-23} \right)$. Find $G_K$. 
+    \end{example}
+    
+    \begin{answer}
+        Note $-23\equiv 1\mod 4$, so that $\mO_K = \Z\left[ \alpha \right]$ where $\alpha = \frac{1+\sqrt{-23}}{2}$. 
+
+        Observe that
+        \begin{equation*}
+            \left( 2\alpha-1 \right)^{2} = -23 \implies 4\alpha^{2}-4\alpha+1 = -23 \implies 4\alpha^{2}-4\alpha+24 = 0,
+        \end{equation*} 
+        so that
+        \begin{equation*}
+            f = x^{2}-x+6
+        \end{equation*}
+        is the minimal polynomial for $\alpha$.
+
+        Since $\alpha$ is not real, there are only a pair of complex embeddings from $K$ to $\CC$, namely one that sends $\alpha$ to $\alpha$ and another that sends $\alpha$ to $\alpha^{*}$. It follows
+        \begin{equation*}
+            B_K = \frac{2!}{2^2}\left( \frac{4}{\pi} \right)\sqrt{23} \approx 3.05.
+        \end{equation*}
+        This means we can choose the representatives of each ideal class group to be at most $3$. But $2,3$ are prime numbers, which means if an ideal has norm $2$ or $3$, then it is prime. More precisely, if $N\left( I \right)=2$ and
+        \begin{equation*}
+            I = P_1^{n_1}\cdots P_k^{n_k},
+        \end{equation*}
+        then $2 = N\left( P_1 \right)^{n_1}\cdots N\left( P_k \right)^{n_k}$. But $2$ is a prime, so it follows $k=1$ and $n_1=1$. Hence working in $\Z_2,\Z_3$, we get every ideal classes.
+
+        Over $\Z_2$,
+        \begin{equation*}
+            f = x\left( x-1 \right),
+        \end{equation*}
+        so that
+        \begin{equation}
+            \left< 2 \right> = \left< \alpha,2 \right>\left< \alpha-1,2 \right>.
+        \end{equation}
+
+        Similarly, over $\Z_3$, again
+        \begin{equation*}
+            f = x\left( x-1 \right),
+        \end{equation*}
+        so that
+        \begin{equation}
+            \left< 3 \right> = \left< \alpha,3 \right>\left< \alpha-1,3 \right>.   
+        \end{equation}
+
+        It follows that
+        \begin{equation*}
+            G_K = \left\lbrace \left[ \left< 1 \right>  \right], \left[ \left< \alpha,2 \right>  \right], \left[ \left< \alpha-1,2 \right>  \right], \left[ \left< \alpha,3 \right>  \right], \left[ \left< \alpha-1,3 \right>  \right] \right\rbrace.
+        \end{equation*}
+
+        By [4.1] and [4.2], observe that
+        \begin{equation*}
+            \begin{aligned}
+                \left[ \left< \alpha,2 \right>  \right]^{-1} & = \left[ \left< \alpha-1,2 \right>  \right], \\
+                \left[ \left< \alpha,3 \right>  \right]^{-1} & = \left[ \left< \alpha-1,3 \right>  \right],
+            \end{aligned} 
+        \end{equation*}
+        as the ideal class of nonzero ideals is the identity element. Moreover,
+        \begin{equation*}
+            \left( \alpha-1 \right)\left< \alpha,2 \right> = \left< \left( \alpha-1 \right)\alpha,2\left( \alpha-1 \right) \right> = \left< \alpha^{2}-\alpha,2\alpha-2 \right> = \left< -6,2\left( \alpha-1 \right) \right> = 2\left< -3,\alpha-1 \right> = 2\left< \alpha-1,3 \right>.\footnotemark[1]
+        \end{equation*}
+        This means
+        \begin{equation*}
+            \left[ \left< \alpha,2 \right>  \right] = \left[ \left< \alpha-1,3 \right>  \right].
+        \end{equation*}
+        Taking inverses,
+        \begin{equation*}
+            \left[ \left< \alpha-1,2 \right>  \right] = \left[ \left< \alpha,3 \right>  \right].
+        \end{equation*}
+        Hence
+        \begin{equation*}
+            G_K = \left\lbrace \left[ \left< 1 \right>  \right], \left[ \left< \alpha,2 \right>  \right], \left[ \left< \alpha-1,2 \right>  \right] \right\rbrace.
+        \end{equation*}
+
+        Let's see if $G_K$ could be trivial. That is, suppose
+        \begin{equation*}
+            \left[ \left< \alpha,2 \right>  \right] = \left[ \left< \frac{a+b\sqrt{-23}}{2} \right>  \right]
+        \end{equation*}
+        for some $a,b\in\Z$. Taking norms,
+        \begin{equation*}
+            2 = \left( \frac{a+b\sqrt{-23}}{2} \right)\left( \frac{a-b\sqrt{-23}}{2} \right) = \frac{a^{2}+23b^{2}}{4} \implies a^{2}+23b^{2} = 8,
+        \end{equation*}
+        which is a contradiction. Hence we conclude $\left[ \left< \alpha,2 \right>  \right] \neq \left[ \left< 1 \right>  \right]$.
+
+        Moreover, suppose $\left< \alpha,2 \right>^{2} = \left< \frac{a+b\sqrt{-23}}{2} \right>$ for some $a,b\in\Z$. This means
+        \begin{equation*}
+            4 = \frac{a^{2}+23b^{2}}{4} \implies \left| a \right| = 4, b=0 \implies \left< \alpha,2 \right>^{2} = \left< 2 \right>.  
+        \end{equation*}
+        But we know 
+        \begin{equation*}
+            \left< \alpha,2 \right>\left< \alpha-1,2 \right> = \left< 2 \right>, 
+        \end{equation*}
+        so by the uniqueness $\left< \alpha-1,2 \right> = \left< \alpha,2 \right>$. This is a contradiction, since $\alpha-1,\alpha$ being in the same ideal implies that the ideal is $\left< 1 \right>$.   
+
+        Thus we conclude
+        \begin{equation*}
+            G_K = \left\lbrace \left[ \left< 1 \right>  \right], \left[ \left< \alpha,2 \right>  \right], \left[ \left< \alpha-1,2 \right>  \right] \right\rbrace \iso \Z_3.
+        \end{equation*}
+        
+        \noindent
+        \begin{minipage}{\textwidth}
+            \footnotetext[1]{\textit{"Well one has $\alpha$ and another has $\alpha-1$ so let's see what happens when we multiply by $\alpha-1$."} - Blake}
+        \end{minipage}
+    \end{answer}
+    
+    \np In case where $B_K\geq 4$ for instance, the ideal classes of norm $4$ are of the form $\left[ P_1P_2 \right]$ for some prime ideals $P_1,P_2$ of norm $2$ (where $P_1,P_2$ need not be distinct).
+
+    \begin{exercise}{}
+        Consider $K=\Q\left( \sqrt{-15} \right)$. Prove
+        \begin{equation*}
+            G_K \iso \Z_2.
+        \end{equation*}
+    \end{exercise}
+
+    \rruleline
+    
+    \begin{example}{}
+        Consider $K=\Q\left( \alpha \right)$, where $\alpha\in\CC$ is a root of $f=x^{3}+4x+1$. Let $R=\mO_K$. Is $R$ a PID?
+    \end{example}
+
+    \begin{answer}
+        Note $\disc\left( \alpha \right) = -283$, which is prime, so squarefree in particular. This means
+        \begin{equation*}
+            R = \Z\left[ \alpha \right].
+        \end{equation*}
+        Since $\disc\left( \alpha \right)<0$ and $\deg\left( f \right)$ is odd, it follows that $f$ has a pair of complex roots, as $\disc\left( \alpha \right)$ is the square of differences of roots of $f$. It follows $s=r=1$, so that
+        \begin{equation*}
+            B_K = \frac{3!}{3^3}\left( \frac{4}{\pi} \right)\sqrt{283} \approx 4.76.
+        \end{equation*}
+        This means the group is generated by (classes of) prime ideals $P$ with norm $2$ or $3$. That is, $2\in P$ or $3\in P$.
+
+        Modulo $2$,
+        \begin{equation*}
+            f = x^{3}+1 = \left( x+1 \right)\left( x^{2}+x+1 \right).
+        \end{equation*}
+        This means
+        \begin{equation*}
+            P_1 = \left< \alpha+1,2 \right>, P_2 = \left< \alpha^{2}+\alpha+1,2 \right>  
+        \end{equation*}
+        are the prime ideals which has $2$. We know that $N\left( P_1 \right) = 2^1, N\left( P_2 \right) = 2^{2} = 4$ from the proof of Kummer-Dedekind theorem. Since $\left( \alpha+1 \right)\left( \alpha^{2}+\alpha+1 \right) = f\left( \alpha \right) \equiv 0 \mod 2$, it follows $\left[ P_1 \right] = \left[ P_2 \right]^{-1}$.
+
+        Modulo $3$,
+        \begin{equation*}
+            f = x^{3}+x+1 = \left( x+2 \right)\left( x^{2}+x+2 \right).
+        \end{equation*}
+        This means
+        \begin{equation*}
+            Q_1 = \left< \alpha-1,3 \right>, Q_2 = \left< \alpha^{2}+\alpha-1,3 \right>  
+        \end{equation*}
+        are the prime ideals which has $3$. Since $N\left( Q_1 \right) = 3, N\left( Q_2 \right) = 9$ but $B_K\approx 4.76$, so that we can discard $Q_2$.
+
+        Hence
+        \begin{equation*}
+            G_K = \left\lbrace \left[ \left< 1 \right>  \right], \left[ P_1 \right], \left[ Q_1 \right],\left[ P_2 \right],\left[ P_1^{2} \right] \right\rbrace.
+        \end{equation*}
+        Since without $\left[ Q_1 \right]$ $G_K$ would be a cyclic group generated by $\left[ P_1 \right]$ (whose order we do not know yet), let's see if we can remove $\left[ Q_1 \right]$.
+
+        Observe that
+        \begin{equation*}
+            f = \left( x-1 \right)\left( x^{2}+x+5 \right) + 6,
+        \end{equation*}
+        so that
+        \begin{equation*}
+            -6 = \left( \alpha-1 \right)\left( \alpha^{2}+\alpha+5 \right).
+        \end{equation*}
+        Denote $\beta = \alpha^{2}+\alpha+5$. It follows that
+        \begin{equation*}
+            \beta Q_1 = \left< \beta\left( \alpha-1 \right), 3\beta \right> = \left< -6,3\beta \right> = \left< 6,3\beta \right> = 3\left< 2,\beta \right> = 3\left< 2,\alpha^{2}+\alpha+5 \right> = 3\left< 2,\alpha^{2}+\alpha+1 \right> = 3P_2.      
+        \end{equation*}
+        Hence
+        \begin{equation*}
+            \left[ Q_1 \right] = \left[ P_2 \right],
+        \end{equation*}
+        so that
+        \begin{equation*}
+            G_K = \left\lbrace \left[ \left< 1 \right>  \right], \left[ P_1 \right], \left[ P_2 \right],\left[ P_1^{2} \right] \right\rbrace.
+        \end{equation*}
+        Since $G_K$ is a cyclic group generated by $\left[ P_1 \right]$, so
+        \begin{equation*}
+            P_1 \text{ is principal} \iff R\text{ is a PID}.
+        \end{equation*}
+
+        Showing $P_1$ is principal turns out to be a difficult problem (which turn out to be negative). Here's our strategy.
+
+        We first assume $P_1$ is principal, say $P_1 = \left< \gamma \right>$. This means $P_1 = \left< u\gamma \right>$ for any $u\in R^{\times}$.
+        \begin{enumerate}
+            \item Compute $R^{\times}$.
+            \item Show that $P_1 = \left< u\gamma \right>$ for some \textit{small} $u\gamma$.
+            \item This gives us a short list of $u\gamma$ to check $P_1\neq\left< u\gamma \right>$, which is a contradiction. 
+        \end{enumerate}
+        \qedplacedtrue
+        \placeqed[We are not there yet!]
+    \end{answer}
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+
+
+
+
+\end{document}

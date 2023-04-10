@@ -1575,18 +1575,313 @@
     \end{boxyproof}
 
     \begin{proof}[Proof of 3.22(b)]
-        Let $P\subseteq S$ be a prime ideal and let $p\in P$ be a prime number. Suppose $p\nmid n$.  Since $p\in P$ and $\gcd\left( p,n \right) = 1$, $n\notin P$ by Lagrange's theorem. As before, consider
+        Let $P\subseteq S$ be a prime ideal and let $p\in P$ be a prime number. Suppose $p\nmid n$.  Since $p\in P$ and $\gcd\left( p,n \right) = 1$, $n\notin P$. As before, consider
         \begin{equation*}
             P = Q\cap S.
         \end{equation*}
         Since $R_Q$ is a DVR, it suffices to prove the following claim.
 
+        \setcounter{claimcounter}{2}
         \begin{claim}
             \textit{$S_P=R_Q$.}
 
             We know $S_P\subseteq R_Q$.
+
+            Let $x\in R_Q$, so that
+            \begin{equation*}
+                x = \frac{a}{b}
+            \end{equation*}
+            for some $a,b\in R, b\notin Q$. Then by Lagrange, $na,nb\in S$. Moreover, $b\notin Q$ implies $b\notin P$, and we know $n\notin P$. Hence $np\notin P$ as $P$ is a prime ideal, so that
+            \begin{equation*}
+                x = \frac{a}{b} = \frac{na}{nb} \in S_P,
+            \end{equation*}
+            as required.
         \end{claim}
     \end{proof}
+    
+    \subsection{Kummer-Dedekind Theorem}
+
+    Recall that our goal was to factor $\left< p \right>$ into prime ideals of a ring of integers. The following theorem does the job.
+
+    \begin{theorem}{Kummer-Dedekind Theorem}
+        Let $K = \Q\left( \alpha \right)$ be a number field and let $R=\mO_K$. Let $S=\Z\left[ \alpha \right]$ and let $m\in\Z\left[ x \right]$ be the minimal polynomial for $\alpha$ over $\Q$. Let $p$ be a prime number with $p\nmid\left[ R:S \right]$. Suppose
+        \begin{equation*}
+            m = p_1^{e_1}\cdots p_k^{e_k}
+        \end{equation*}
+        is the irreducible factorization of $m$ over $\Z_p$. Let $P_i = \left( p_i\left( \alpha \right),p \right)R$ for all $i\in\left\lbrace 1,\ldots,n \right\rbrace$. Then
+        \begin{equation*}
+            \left< p \right> = P_1^{e_1}\cdots P_k^{e_k} 
+        \end{equation*}
+        is the prime factorization of $\left< p \right> $ in $R$.
+    \end{theorem}
+
+    \begin{proof}
+        Consider the homomorphism
+        \begin{equation*}
+            \begin{aligned}
+                \phi:\Z\left[ x \right] &\to R /P_i \\
+                f & \mapsto f\left( \alpha \right) + P_i
+            \end{aligned} .
+        \end{equation*}
+        Immediately, $p_i,p\in\ker\left( \phi \right)$. Moreover,
+        \begin{equation*}
+            \Z\left[ x \right] /\left< p_i,p \right> \iso \Z_p\left[ x \right] / \left< p_i \right>,  
+        \end{equation*}
+        but $p_i$ is irreducible so $\left< p_i \right>$ is maximal. It follows $\left< p_i,p \right>$ is also maximal. It follows
+        \begin{equation}
+            \ker\left( \phi \right) = \left< p_i,p \right> \text{ or } \ker\left( \phi \right) = \Z\left[ x \right].
+        \end{equation}
+
+        To apply the first isomorphism theorem, we require the following fact.
+
+        \begin{claim}
+            \textit{$\phi$ is surjective.}
+
+            We know $p\nmid\left[ R:S \right]$ and
+            \begin{equation*}
+                \left[ R:S \right] = \left[ R:\Z\left[ \alpha \right]+pR \right]\left[ \Z\left[ \alpha \right]+pR:S \right],
+            \end{equation*}
+            so that $p\nmid\left[ R:\Z\left[ \alpha \right]+pR \right],\left[ \Z\left[ \alpha \right]+pR:S \right]$.
+
+            Moreover,
+            \begin{equation*}
+                \left[ R:pR \right] = \left[ R:\Z\left[ \alpha \right]+pR \right]\left[ \Z\left[ \alpha \right]+pR:pR \right] 
+            \end{equation*}
+            and
+            \begin{equation*}
+                \left[ R:pR \right] = \left| R /pR \right| = N\left( pR \right) = \left| N_{K /\Q}\left( p \right) \right| = p^{\left[ K:\Q \right]}.
+            \end{equation*}
+
+            Hence it follows $\left[ R:\Z\left[ \alpha \right]+pR \right] = 1$. That is,
+            \begin{equation*}
+                R = \Z\left[ \alpha \right]+pR.
+            \end{equation*}
+            Consider $s\in R$. Then
+            \begin{equation*}
+                s+P_i = f\left( \alpha \right) + pr + P_i\in R /P_i
+            \end{equation*}
+            for some $f\in\Z\left[ x \right]$ and $r\in R$. But $p\in P_i$, so that
+            \begin{equation*}
+                s+P_i = f\left( \alpha \right) + P_i
+            \end{equation*}
+        \end{claim}
+
+        By the first isomorphism theorem and [3.12],
+        \begin{equation*}
+            \Z\left[ x \right] /\left< p_i,p \right> \iso R /P_i 
+        \end{equation*}
+        or
+        \begin{equation*}
+            \Z\left[ x \right] /\Z\left[ x \right] \iso R /P_i \implies P_i = R.
+        \end{equation*}
+
+        Without loss of generality assume $P_1,\ldots,P_r$ are such that
+        \begin{equation*}
+            R /P_i\iso \Z\left[ x \right] / \left< p_i,p \right>, \hspace{2cm}\forall i\leq r 
+        \end{equation*}
+        and suppose $P_{r+1},\ldots,P_k=R$. For $i\leq r$, let $f_i = \deg\left( p_i \right)$. This means
+        \begin{equation*}
+            N\left( P_i \right) = \left| R /P_i \right| = \left| \Z\left[ x \right] /\left< p_i,p \right>  \right| = \left| \Z_p\left[ x \right] /\left< p_i \right>  \right| = p^{f_i}.
+        \end{equation*}
+
+        \begin{claim}
+            $P_1^{e_1}\cdots P_k^{e_k}\subseteq\left< p \right>$. 
+
+            Recall $P_i = \left< p_i\left( \alpha \right),p \right>$ and
+            \begin{equation*}
+                m = p_1^{e_1}\cdots p_k^{e_k}
+            \end{equation*}
+            is the irreducible factorization of $m$ over $\Z_p$, so that
+            \begin{equation*}
+                m\left( \alpha \right) \in \left< p \right>. 
+            \end{equation*}
+        \end{claim}
+
+        By Claim 2, $P_1^{e_1}\cdots P_r^{e_r}\subseteq \left< P \right>$, so that 
+        \begin{equation*}
+            \left< p \right> | P_1^{e_1}\cdots P_r^{e_r} .
+        \end{equation*}
+        Hence the prime factorization of $\left< p \right>$ is  
+        \begin{equation*}
+            \left< p \right> = P_1^{d_1}\cdots P_r^{d_r} 
+        \end{equation*}
+        for some $d_1\leq e_1, \ldots, d_r\leq e_r$.
+
+        Finally, taking norms,
+        \begin{equation*}
+            p^{\left[ K:\Q \right]} = N\left( P_1 \right)^{d_1}\cdots N\left( P_r \right)^{d_r} = p^{f_1d_1}\cdots p^{f_rd_r}.
+        \end{equation*}
+        That is,
+        \begin{equation*}
+            \left[ K:\Q \right] = f_1d_1+\cdots+f_rd_r.
+        \end{equation*}
+        However,
+        \begin{equation*}
+            \left[ K:\Q \right] = \deg\left( m \right) = f_1e_1+\cdots+f_ke_k.
+        \end{equation*}
+        It follows
+        \begin{equation*}
+            f_1d_1+\cdots+f_rd_r=f_1e_1+\cdots+f_ke_k \implies r=k, d_i = e_i.
+        \end{equation*}
+        Thus
+        \begin{equation*}
+            \left< p \right> = P_1^{e_1}\cdots P_k^{e_k}. 
+        \end{equation*}
+    \end{proof}
+    
+    \np Here is a recap of the work over few sections. Suppose we want to factor an ideal $I$:
+    \begin{equation*}
+        I = P_1^{e_1}\cdots P_k^{e_k}.
+    \end{equation*}
+    Then,
+    \begin{equation*}
+        N\left( I \right) = N\left( P_1 \right)^{e_1}\cdots N\left( P_k \right)^{e_k}
+    \end{equation*}
+    where $N\left( P_i \right) = \left| R /P_i \right| = p_i^{f_i}$, as $R$ is not only a Dedekind domain, but also a ring of integers; quotients by a prime ideal of a ring of integers are guaranteed to be finite.
+
+    This means
+    \begin{equation*}
+        p_i\in P_i \implies \left< p_i \right>\subseteq P_i \implies P_i|\left< p_i \right>.
+    \end{equation*}
+    Moreover, so long as $p_i\nmid\left[ R:S \right]$,
+    \begin{equation*}
+        \text{Kummer-Dedekind: \textit{$\left< p_i \right>$ factors like the minimal polynomial for $\alpha$ over $\Z_{p_i}$.}}
+    \end{equation*}
+    Finally, if $P_i = \left< q_i\left( \alpha \right),p_i \right>$, then
+    \begin{equation*}
+        N\left( P_i \right) = \left| \Z_{p_i}\left[ x \right] /\left< q_i \right>  \right| = p_i^{\deg\left( q_i \right)},
+    \end{equation*}
+    which helps us determine $e_i$.
+
+    \clearpage
+
+    \begin{example}{}
+        Let $f=x^{3}-x^{2}+3\in\Q\left[ x \right]$ which is irreducible and let $\alpha\in\CC$ be a root of $f$. Let $K=\Q\left( \alpha \right)$ and let $R=\mO_K$. Factor $I = \left< \alpha+2 \right>$.
+    \end{example}
+
+    \begin{answer}
+        We first compute $N\left( I \right)$. By computing the norm, we get candidates for $N\left( P_i \right)$.
+
+        Observe
+        \begin{equation*}
+            N\left( I \right) = \left| R /\left< \alpha+2 \right>  \right| = \left| N_{K /\Q}\left( \alpha+2 \right) \right|.
+        \end{equation*}
+        But $K = \Q\left( \alpha \right) = \Q\left( \alpha+2 \right)$. Moreover, $g=f\left( x-2 \right)$ is the minimal polynomial for $\alpha+2$,\footnotemark[1] so that
+        \begin{equation*}
+            \left| N_{K /\Q}\left( \alpha+2 \right) \right| = \left| N_{\Q\left( \alpha+2 \right) /\Q}\left( \alpha+2 \right) \right| = \left| g\left( 0 \right) \right| = \left| f\left( -2 \right) \right| = 3^{2}.
+        \end{equation*}
+
+        Observe that $\disc\left( f \right) = -3^17^111^1$. Since $3^{2}\nmid\disc\left( f \right)$, it follows
+        \begin{equation*}
+            3\nmid\left[ R:S \right].
+        \end{equation*}
+        Over $\Z_3$,
+        \begin{equation*}
+            f = x^{3}-x^{2} = x^{2}\left( x-1 \right).
+        \end{equation*}
+        By the Kummer-Dedekind theorem, it follows
+        \begin{equation*}
+            \left< 3 \right> = \left< \alpha,3 \right>^{2}\left< \alpha-1,3 \right>.   
+        \end{equation*}
+
+        Observe that $\alpha+2\notin\left< \alpha,3 \right>$, since otherwise $1\in\left< \alpha,3 \right>$, contradicting the fact that $\left< \alpha,3 \right>$ is a prime ideal (which we know by the Kummer-Dedekind theorem). On the other hand,
+        \begin{equation*}
+            \alpha+2 = \alpha-1+3 \in \left< \alpha-1,3 \right>. 
+        \end{equation*}
+        Hence
+        \begin{equation*}
+            I = \left< \alpha-1,3 \right>^{e_1} 
+        \end{equation*}
+        for some $e_1\in\N$. This means
+        \begin{equation*}
+            9 = N\left( \left< \alpha-1,3 \right>  \right)^{e_1} = \left( 3^{\deg\left( x-1 \right)} \right)^{e_1} = 3^{e_1} \implies e_1 = 2.
+        \end{equation*}
+        Thus
+        \begin{equation*}
+            I = \left< \alpha-1,3 \right>^{2}. 
+        \end{equation*}
+
+        \noindent
+        \begin{minipage}{\textwidth}
+            \footnotetext[1]{This trick works because $x\mapsto x+k$ for some $k\in\Q$ is an isomorphism. In other words, if we have quadratic, cubic, .., principal ideal instead of $I$, we have to find the minimal polynomial in a different way.}
+        \end{minipage}
+    \end{answer}
+    
+    \subsection{Ramification}
+
+    Consider the following setting.
+
+    Let $p\in\N$ be a prime number and let $K$ be a number field. Say
+    \begin{equation*}
+        \left< p \right> = P_1^{e_1}\cdots P_k^{e_k} 
+    \end{equation*}
+    is the prime factorization of $\left< p \right>$ in $R=\mO_K$. As before,
+    \begin{equation*}
+        N\left( P_i \right) = p^{f_i}
+    \end{equation*}
+    for some $f_i\in\N$, since we are factoring $\left< p \right>$ so $p|N\left( P_i \right)$. 
+
+    \begin{definition}{\textbf{Ramification Index}, \textbf{Residue Field Degree}}
+        We say $e_i$ is the \emph{ramification index} of $P_i$ over $p$ and $f_i$ the \emph{residue field degree} of $P_i$ over $p$.
+
+        We say $p$ is \emph{ramified} in $K$ if some $e_i>1$. Otherwise, we say $p$ is \emph{unramified}.
+    \end{definition}
+
+    \np The idea is that
+    \begin{equation*}
+        \text{\textit{ramified prime}} \iff \text{\textit{complicated prime}}.
+    \end{equation*}
+
+    \np We can compute the residue field degree quite easily as follows:
+    \begin{equation*}
+        f_i = \left[ R /P_i:\Z_p \right].
+    \end{equation*}
+    
+    \clearpage
+
+    \begin{theorem}{}
+        Let $K$ be a number field and let $p\in\N$ be a prime. Then
+        \begin{equation*}
+            \text{$p$ is ramified in $K$} \iff p|\disc\left( K \right).
+        \end{equation*}
+    \end{theorem}
+
+    \begin{proof}
+        ($\impliedby$) Beyond the scope of the course (a two week of algebra which we can't offer).
+
+        ($\implies$) Let $P\subseteq\mO_K$ be a prime ideal such that $p\in P$ and $P$ is ramified so that $P^{2}|\left< p \right>$. Suppose $\left< p \right>$ factors as
+        \begin{equation*}
+            \left< p \right> = PI. 
+        \end{equation*}
+        Note that, if $Q\subseteq\mO_K$ is a prime ideal with $p\in Q$, then $I\subseteq Q$. We also know that $\left< p \right>\neq I$, as $\left< p \right> = PI$. Let $\alpha\in I\setminus\left< p \right>$. Let $\left\lbrace v_1,\ldots,v_n \right\rbrace$ be an integral basis for $\mO_K$ and let $\sigma_1,\ldots,\sigma_n$ be embeddigns of $K$ in $\CC$. Since $\alpha\in I\subseteq\mO_K$, write
+        \begin{equation*}
+            \alpha = m_1v_1+\cdots+m_nv_n
+        \end{equation*}
+        for some unique $m_1,\ldots,m_n\in\Z$. This means $p\nmid m_i$ for some $i$, so suppose $p\nmid m_1$ without loss of generality. Then, using elementary column operations,
+        \begin{equation*}
+            \disc\left( \alpha,v_2,\ldots,v_n \right) = \disc\left( m_1v_1,v_2,\ldots,v_n \right) = m_1^{2}\disc\left( v_1,\ldots,v_n \right) = m_1^{2}\disc\left( K \right).
+        \end{equation*}
+        Hence it remains to show $p|\disc\left( \alpha,v_2,\ldots,v_n \right)$, as $p\nmid m_1$.
+
+        We may extend each $\sigma_i$ to $\sigma_i:L\to L$, where $L$ is the Galois closure of $K$. Let $S=\mO_L$. Suppose $Q$ is a prime ideal of $S$ such that $p\in Q$. Then $Q\cap\mO_K$ is a prime ideal of $\mO_K$ which has $p$ and so $\alpha\in Q$, as $I\subseteq Q\cap\mO_K$. For $\sigma\in\gal\left( L /\Q \right)$, we also have that $\alpha\in\sigma^{-1}\left( Q \right)$, so that $\sigma\left( \alpha \right)\in Q$. That is,
+        \begin{equation*}
+            \sigma_i\left( \alpha \right)\in Q
+        \end{equation*}
+        for all $i\in\left\lbrace 1,\ldots,n \right\rbrace$. Hence
+        \begin{equation*}
+            \disc\left( \alpha,v_2,\ldots,v_n \right) \in Q\cap\Z = p\Z.
+        \end{equation*}
+        In particupar, $p|\disc\left( \alpha,v_2,\ldots,v_n \right)$, as required.
+    \end{proof}
+    
+    \np Suppose $K$ is a number field with $\left[ K:\Q \right] = n$. Let $p$ be a prime number with
+    \begin{equation*}
+        \left< p \right> = P_1^{e_1}\cdots P_k^{e_k} 
+    \end{equation*}
+    and $N\left( P_I \right) = p^{f_i}$. This means
+    \begin{equation*}
+        N\left( \left< p \right>  \right) = p^{f_1e_1}\cdots p^{f_ke_k} \implies p^n = p^{\sum^{k}_{i=1}f_ie_i} \implies n = \sum^{k}_{i=1}f_ie_i.
+    \end{equation*}
     
     
     

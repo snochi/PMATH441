@@ -1,0 +1,449 @@
+\documentclass[pmath441]{subfiles}
+
+%% ========================================================
+%% document
+
+\begin{document}
+
+    \section{Dirichlet's Unit Theorem}
+
+    \subsection{Motivation}
+    
+    \begin{example}{}
+        Let $K=\Q\left( \sqrt{2} \right), R = \mO_K = \Z\left[ \sqrt{2} \right]$. Compute $R^\times$.
+    \end{example}
+
+    \begin{answer}
+        Every element of $R$ is of the form $a+b\sqrt{2}$ for some $a,b\in\Z$, and
+        \begin{equation*}
+            a+b\sqrt{2}\in R^\times \iff \left| a^{2}-2b^{2} \right| = 1.
+        \end{equation*}
+        By inspection
+        \begin{equation*}
+            1,-1,1+\sqrt{2}\in R^\times.
+        \end{equation*}
+
+        \begin{claim}
+            \textit{If $u\in R^\times$ with $u>1$, then $u\geq 1+\sqrt{2}$.}
+
+            In other words, the \textit{next biggest unit after $1$ is $1+\sqrt{2}$}. Suppose $u\in R^\times$ with $1<u\leq 1+\sqrt{2}$. It suffices to show $u=1+\sqrt{2}$. Write
+            \begin{equation*}
+                u = a+b\sqrt{2}.
+            \end{equation*}
+            Then
+            \begin{equation*}
+                1 = \left| a^{2}-2b^{2} \right| = \left| a-b\sqrt{2} \right|\left| a+b\sqrt{2} \right| \implies \left| a-b\sqrt{2} \right| < 1 \implies -1<a-b\sqrt{2}<1.
+            \end{equation*}
+            It follows
+            \begin{equation*}
+                0 < a < 1+\frac{1}{\sqrt{2}}
+            \end{equation*}
+            by combining $1<u\leq 1+\sqrt{2}, -1<a-b\sqrt{2}<1$. But $a\in\Z$, so that $a = 1$. It follows
+            \begin{equation*}
+                1 < 1+b\sqrt{2}\leq 1+\sqrt{2} \implies b = 1,
+            \end{equation*}
+            so that $u=a+b\sqrt{2} = 1+\sqrt{2}$, as required.
+        \end{claim}
+
+        Suppose $u\in R^\times$ with $u\neq 1, -1$. By considering that
+        \begin{equation*}
+            u \text{ is a unit} \implies u,-u,\frac{1}{u},-\frac{1}{u}\text{ are units},
+        \end{equation*}
+        so we may assume $u>1$. We also know $u\geq 1+\sqrt{2}$ by Claim 1. Let $k\in\N$ be such that
+        \begin{equation*}
+            \left( 1+\sqrt{2} \right)^k \leq u < \left( 1+\sqrt{2} \right)^{k+1}.
+        \end{equation*}
+        It follows
+        \begin{equation*}
+            1 \leq u\left( 1+\sqrt{2} \right)^{-k} < 1+\sqrt{2} \implies 1 = u\left( 1+\sqrt{2} \right)^{-k} \implies u = \left( 1+\sqrt{2} \right)^k.
+        \end{equation*}
+        So by considering $u,-u,\frac{1}{u},-\frac{1}{u}$, it follows
+        \begin{equation*}
+            R^\times = \left\lbrace -\left( 1+\sqrt{2} \right)^k, \left( 1+\sqrt{2} \right)^k: k\in\Z \right\rbrace.
+        \end{equation*}
+    \end{answer}
+    
+    \subsection{Unit Theorem}
+
+    \begin{definition}{\textbf{Multiplicatively Independent} Complex Numbers}
+        Let $\epsilon_1,\ldots,\epsilon_m\in\CC^\times$. We say $\epsilon_1,\ldots,\epsilon_m$ are \emph{multiplicatively independent} if and only if
+        \begin{equation*}
+            \epsilon_1^{n_1}\cdots\epsilon_m^{n_m} = 1 \text{ for $n_1,\ldots,n_m\in\Z$} \iff n_1=\cdots=n_m=0.
+        \end{equation*}
+    \end{definition}
+
+    \clearpage
+    
+    \begin{theorem}{Dirichlet's Unit Theorem}
+        Let $K$ be a number field, let $R=\mO_K$, let $r$ be the number of embeddings $K\to\CC$ and let $s$ be the number of complex pairs of embeddings $K\to\CC$. Then there exists multiplicatively independent $\epsilon_1,\ldots,\epsilon_m\in K$ (with $m=r+s-1$) such that
+        \begin{equation*}
+            R^\times = \left\lbrace \zeta\epsilon_1^{n_1}\cdots\epsilon_m^{n_m}: n_1,\ldots,n_m\in\Z, \zeta\text{ is a root of unity in $K$} \right\rbrace.
+        \end{equation*}
+    \end{theorem}
+    
+    \rruleline
+
+    \begin{definition}{\textbf{Fundamental System of Units} for a Number Field}
+        Consider the setting of Theorem 5.1. We call $\left\lbrace \epsilon_1,\ldots,\epsilon_m \right\rbrace$ a \emph{fundamental system of units} for $K$.
+    \end{definition}
+    
+    \begin{remark}{Multiplicative Independence}
+        Let $K$ be a number field and let $n=\left[ K:\Q \right]$. Since complex embeddings always come in a pair of conjugate embeddings, we have
+        \begin{equation*}
+            n+r+2s.
+        \end{equation*}
+
+        Given multiplicatively independent $\epsilon_1,\ldots,\epsilon_m$, we have
+        \begin{equation*}
+            \epsilon_1^{n_1}\cdots\epsilon_m^{n_m} = \epsilon_1^{k_1}\cdots\epsilon_m^{k_m} \implies \epsilon_1^{n_1-k_1}\cdots\epsilon_m^{n_m-k_m} = 1 \implies n_i-k_i = 0 \text{ for all $i$} \implies n_i = k_i \text{ for all $i$}.
+        \end{equation*}
+        
+        Suppose $\zeta_1,\zeta_2$ are roots of unity, with
+        \begin{equation*}
+            \zeta_1\epsilon_1^{n_1}\cdots\epsilon_m^{n_m} =
+            \zeta_2\epsilon_1^{k_1}\cdots\epsilon_m^{k_m}.
+        \end{equation*}
+        Then there is $N\in\N$ such that $\zeta_1^N=\zeta_2^N=1$, so that
+        \begin{equation*}
+            \epsilon_1^{Nn_1}\cdots\epsilon_m^{Nn_m} = \epsilon_1^{Nk_1}\cdots\epsilon_m^{Nk_m} \implies Nn_i = Nk_i\text{ for all $i$} \implies n_i=k_i\text{ for all $i$} \implies \zeta_1=\zeta_2.
+        \end{equation*}
+
+        It follows
+        \begin{equation*}
+            \mO_K^\times \iso T\times\Z^m,
+        \end{equation*}
+        where $T$ is the group of roots of unity in $K$. The isomorphism is given by
+        \begin{equation*}
+            \zeta\epsilon_1^{n_1}\cdots\epsilon_m^{n_m} \leftrightarrow \left( \zeta,\left( n_1,\ldots,n_m \right) \right),
+        \end{equation*}
+        provided $\left\lbrace \epsilon_1,\ldots,\epsilon_m \right\rbrace$ is a fundamental system of units of $K$.
+
+        Suppose $r>0$ (i.e. there is a real embedding of $K$ in $\CC$), so let $\sigma:K\to\CC$ be real-valued. Let $\zeta\in K$ be a root of unity, say $\zeta^l=1$. This means
+        \begin{equation*}
+            \sigma\left( \zeta \right)^l = \sigma\left( 1 \right) = 1 \implies \sigma\left( \zeta \right) = \pm 1 = \sigma\left( \pm 1 \right) \implies \zeta = \pm 1.
+        \end{equation*}
+        That is, when we have a real embedding of $K$ in $\CC$, the only roots of unity in $K$ are $-1,1$.
+    \end{remark}
+    
+    \begin{definition}{\textbf{Lattice} in $\R^n$}
+        A \emph{lattice} in $\R^n$ is a set
+        \begin{equation*}
+            L = \spn_{\Z}\left\lbrace v_1,\ldots,v_k \right\rbrace,
+        \end{equation*}
+        where $\left\lbrace v_1,\ldots,v_k \right\rbrace\subseteq\R^n$ is $\R$-linearlity independent. 
+
+        We say $L$ is \emph{full} if $k=n$.
+    \end{definition}
+
+    \np Let $K$ be a number field, $n=\left[ K:\Q \right]$, $r$ be the number of real embeddings of $K$ in $\CC$ and $s$ be the number of conjugate pair of complex embeddings of $K$ in $\CC$. Let $\sigma_1,\ldots,\sigma_r:K\to\CC$ be the real embeddings and let $\sigma_{r+1},\ldots,\sigma_{r+s}:K\to\CC$ be representatives of pair embeddings (i.e. each pair is $\sigma_{r+i},\sigma_{r+i}^{*}$ for exactly one $i$).
+
+    \clearpage
+    \begin{definition}{\textbf{Minkowski Embedding}}
+        Consider the above setting. We define the \emph{Minkowski embedding} of $K$ in $\R^n$ by
+        \begin{equation*}
+            \begin{aligned}
+                \psi:K&\to\R^n \\
+                x & \mapsto \left( \sigma_1\left( x \right),\ldots,\sigma_r\left( x \right),\re\left( \sigma_{r+1}\left( x \right) \right),\im\left( \sigma_{r+1}\left( x \right) \right),\ldots,\re\left( \sigma_{r+s}\left( x \right) \right),\im\left( \sigma_{r+s}\left( x \right) \right) \right)
+            \end{aligned} .
+        \end{equation*}
+    \end{definition}
+
+    \np Minkowski embedding is an embedding of additive groups
+    \begin{equation*}
+        \psi:\left( K,+ \right) \to \left( \R^n,+ \right).
+    \end{equation*}
+    For brevity, we will often write
+    \begin{equation*}
+        \psi\left( x \right) = \left( \sigma_1\left( x \right),\ldots,\sigma_{r+s}\left( x \right) \right),
+    \end{equation*}
+    as we may consider $\sigma_{r+i}\left( x \right) = \xi+i\eta$ as a pair $\left( \xi,\eta \right)$.
+
+    \begin{definition}{\textbf{Minkowski Lattice} of a Number Field}
+        Let $K$ be a number field. We define the \emph{Minkowski lattice} of $K$ to be
+        \begin{equation*}
+            M_K = \psi\left( \mO_K \right).
+        \end{equation*}
+    \end{definition}
+
+    \np $M_K$ give sus a way to geometrically visualize $\mO_K$.
+
+    \begin{exercise}{}
+        Draw $M_K$ embedded in $\R^{2}$ for $K=\Q\left( \sqrt{2} \right)$.
+    \end{exercise}
+
+    \rruleline
+
+    \np Although $\psi$ is an embedding, we \textit{cannot} use it directly on the group of units $\mO_K^\times$ to expect any structural results, as $\mO_K^\times$ is a \textit{multiplicative} group. For this reason, we will use $\log\left( \cdot \right)$ to turn multiplication into addition.
+
+    Hence define (which we will fix throughout the rest of this chapter)
+    \begin{equation*}
+        \begin{aligned}
+            \phi:K^\times&\to\R^{r+s} \\
+            x & \mapsto \left( \log\left| \sigma_1\left( x \right) \right|,\ldots,\log\left| \sigma_{r+s}\left( x \right) \right| \right)
+        \end{aligned} .
+    \end{equation*}
+
+    \begin{prop}{}
+        $\phi$ is a group homomorphism.
+    \end{prop}
+
+    \rruleline
+
+    \begin{prop}{}
+        Let
+        \begin{equation*}
+            H = \left\lbrace x\in\R^{r+s}:x_1+\cdots+x_r+2x_{r+1}+\cdots+2x_{r+s}=0 \right\rbrace.
+        \end{equation*}
+        Then
+        \begin{equation*}
+            \phi\left( \mO_K^\times \right)\subseteq H.
+        \end{equation*}
+    \end{prop}
+
+    \begin{proof}
+        Let $x\in\phi\left( \mO_K^{\times} \right)$. Then $x=\phi\left( a \right)$ for some $a\in\mO_K^\times$, so that
+        \begin{equation*}
+            \sum^{r}_{i=1} x_i + 2\sum^{s}_{j=1}x_{r+j} = \sum^{r}_{i=1}\log\left| \sigma_i\left( a \right) \right| + 2\sum^{s}_{j=1}\log\left| \sigma_{r+j}\left( a \right) \right| = \log\left| \prod^{r}_{i=1}\sigma_i\left( a \right)\prod^{s}_{j=1}\sigma_{r+j}\left( a \right) \right| = \log\left| N_{K /\Q}\left( a \right) \right| = \log\left( 1 \right) = 0,
+        \end{equation*}
+        as $a$ is a unit. The third equality is from Assignment 5.
+    \end{proof}
+    
+    \clearpage
+
+    \np Consider the setting of Proposition 5.3. Then $\dim_{\R}\left( H \right) = r+s-1$ as a hyperplane.
+
+    \np Here are few \textit{lattice facts} we have to steal from lattice theory.
+
+    \begin{fact}{}
+        If $L\subseteq\R^n$ is a lattice and $X\subseteq L$ is bounded, then $X$ is finite.
+    \end{fact}
+
+    \begin{definition}{\textbf{Discrete} Subset of $\R^n$}
+        We say $A\subseteq\R^n$ is \emph{discrete} if for all $a\in A$, there is $\epsilon>0$ such that $B_{\epsilon}\left( a \right)\cap A = \left\lbrace a \right\rbrace$.
+    \end{definition}
+
+    \begin{fact}{}
+        For $L\subseteq\R^n$,
+        \begin{equation*}
+            L\text{ is a lattice in $\R^n$} \iff L\text{ is a discrete additive subgroup}.
+        \end{equation*}
+    \end{fact}
+    
+    \begin{prop}{}
+        $\ker\left( \phi \right)$ is finite.
+    \end{prop}
+
+    \begin{proof}
+        Observe that
+        \begin{equation*}
+            \ker\left( \phi \right) \subseteq \underbrace{\left\lbrace x\in R^{\times}:\forall i\left[ \left| \sigma_i\left( x \right) \right| = 1 \right] \right\rbrace}_{=X}.
+        \end{equation*}
+        This means $\psi\left( X \right)\subseteq M_K$ is bounded, as $-1\leq\sigma_i\left( x \right)\leq 1$ for all $x\in X$. It follows that $\psi\left( X \right)$ is finite by Fact 5.4. Thus $X$ is finite, as $\psi$ is injective.
+    \end{proof}
+    
+    \begin{prop}{}
+        Let $F$ be a field. Then every finite subgroup $G\subseteq F^\times$ is cyclic.
+    \end{prop}
+
+    \begin{proof}
+        Since $G$ is a subgroup of $F^{\times}$ which is abelian, $G$ is abelian. It follows
+        \begin{equation*}
+            G\iso \Z_{n_1}\times\cdots\times\Z_{n_k}
+        \end{equation*}
+        for some prime powers $n_1,\ldots,n_k$ by the classification theorem of fintie abelian groups. Let
+        \begin{equation*}
+            N = n_1\cdots n_k = \left| G \right|
+        \end{equation*}
+        and
+        \begin{equation*}
+            M = \lcm\left( n_1,\ldots,n_k \right).
+        \end{equation*}
+        Then we know that every $g\in G$ satisfy the relation
+        \begin{equation*}
+            g^M-1 = 0
+        \end{equation*}
+        by Lagrange's theorem. This imply
+        \begin{equation*}
+            M\leq N\leq M \implies N=M.
+        \end{equation*}
+        Thus
+        \begin{equation*}
+            G\iso\Z_N,
+        \end{equation*}
+        which is cyclic.
+    \end{proof}
+
+    \begin{cor}{}
+        $\ker\left( \phi \right)$ is cyclic.
+    \end{cor}	
+
+    \placeqed[This follows from Proposition 5.6, 5.7]
+    
+    \begin{prop}{}
+        $\ker\left( \phi \right) = \left\lbrace \zeta\in K: \exists l\in\N\left[ \zeta^l=1 \right] \right\rbrace$.
+    \end{prop}
+
+    \begin{proof}
+        Let $N=\left| \ker\left( \phi \right) \right|$. Then by the Lagrange's theorem,
+        \begin{equation*}
+            x\in\ker\left( \phi \right) \implies x^N = 1.
+        \end{equation*}
+        So for all $\zeta\in K$ with $\zeta^l=1$ for some $l$,
+        \begin{equation*}
+            \sigma_i\left( \zeta \right)^l = 1 \implies \left| \sigma_i\left( \zeta \right) \right| = 1 \implies \log\left( \left| \sigma_i\left( \zeta \right) \right| \right) = 0 \implies \phi\left( \zeta \right) = \left( 0,\ldots,0 \right)
+        \end{equation*}
+        for all $i$, as required.
+    \end{proof}
+
+    \begin{prop}{}
+        $\phi\left( R^{\times} \right)$ is a lattice in $\R^{r+s}$.
+    \end{prop}
+
+    \begin{proof}
+        We show $\phi\left( R^{\times} \right)$ is discrete. Fix $N\in\N$ and consider $X=\left[ -N,N \right]^{r+s}, Y = \phi^{-1}\left( X \right)$. Then for all $u\in Y$ with $\phi\left( u \right)\in X$,
+        \begin{equation*}
+            \left| \log\left( \left| \sigma_i\left( \zeta \right) \right| \right) \right| \leq N.
+        \end{equation*}
+        Hence
+        \begin{equation*}
+            \exists N'\in\N\forall u\in Y\left[ \left| \sigma_i\left( u \right) \right|\leq N' \right].
+        \end{equation*}
+        It follows
+        \begin{equation*}
+            \psi\left( Y \right)\subseteq M_K \text{ is finite} \implies Y \text{ is finite} \implies \phi\left( R^\times \right)\cap X\text{ is finite}.
+        \end{equation*}
+    \end{proof}
+    
+    \begin{prop}{}
+        $\spn_{\R}\left( \phi\left( R^{\times} \right) \right)=H$.
+    \end{prop}
+
+    \begin{proof}
+        Let $W=\spn_{\R}\left( \phi\left( R^{\times} \right) \right)=H$. We know $W\subseteq H$.
+
+        To show $H\subseteq W$, we show that $W^\perp\subseteq H^\perp$. Suppose $z\in\R^{r+s}$, say $z=\left( z_1,\ldots,z_{r+s} \right)$ such that $z\notin H^{\perp}$. 
+
+        \begin{claim}
+            \textit{$z\notin W^{\perp}$.}
+
+            Consider
+            \begin{equation*}
+                \begin{aligned}
+                    f:K^{\times}&\to\R \\
+                    x & \mapsto z\phi\left( x \right)
+                \end{aligned} .
+            \end{equation*}
+            Let
+            \begin{equation*}
+                C = \left( \frac{2}{\pi} \right)^s\sqrt{\left| \disc\left( K \right) \right|}.
+            \end{equation*}
+            Take any $c_1,\ldots,c_{r+s}>0$ such that
+            \begin{equation*}
+                C = c_1\cdots c_rc_{r+1}^{2}\cdots c_{r+s}^{2}.
+            \end{equation*}
+            Let
+            \begin{equation*}
+                A = \left\lbrace \left( x_1,\ldots,x_n \right)\in\R^n : \forall i\leq r \left[ \left| x_i \right|\leq c_i \right], \forall r<i\leq r+s\left[ x_i^{2}+x_{i+s}^{2}\leq c_i \right] \right\rbrace.
+            \end{equation*}
+            Then $A$ is a compact, convex Lebesgue measurable set. Moreover,
+            \begin{equation*}
+                m\left( A \right) = \prod^{r}_{i=1}2c_i\prod^{r+s}_{i=r+1}\pi c_i^{2} = 2^r\pi^sC = 2^r\pi^s\left( \frac{2}{\pi} \right)^s\sqrt{\left| \disc\left( K \right) \right|} = 2^{r+s}\sqrt{\left| \disc\left( K \right) \right|} = 2^n \frac{\sqrt{\left| \disc\left( K \right) \right|}}{2^s} = 2^n\vol\left( M_K \right).
+            \end{equation*}
+            By Minkowski's lemma, there is $a\in A\cap M_K$ such that $a=\psi\left( b \right)$ for some $b\in\mO_K$. By Assignment 5,
+            \begin{equation*}
+                \left| N_{K /\Q}\left( b \right) \right| = N\left( a \right) \leq c_1\cdots c_rc_{r+1}^{2}\cdots c_{r+s}^{2}=C.
+            \end{equation*}
+            
+            Suppose
+            \begin{equation*}
+                \left| \sigma_i\left( b \right) \right| < \frac{c_i}{C}, \hspace{2cm}\forall i.
+            \end{equation*}
+            Then
+            \begin{equation*}
+                1 \leq N\left( \left< b \right>  \right) = \left| N_{K /\Q}\left( b \right) \right| = \left| \sigma_1\left( b \right)\cdots\sigma_r\left( b \right) \right|\left| \sigma_{r+1}\left( b \right) \right|^{2}\cdots\left| \sigma_{r+s}\left( b \right) \right|^{2} < \frac{c_1}{C}\cdots \frac{c_r}{C} \frac{c_{r+1}^{2}}{C^{2}}\cdots \frac{c_{r+s}^{2}}{C^{2}} = \frac{C}{C^n} \leq 1,
+            \end{equation*}
+            as we know $C\geq N\left( a \right)\geq 1$. 
+
+            (\ldots)
+
+            There are finitely many nonzero principal ideals $\left< b_1 \right>,\ldots,\left< b_l \right>\subseteq\mO_K$ of norm at most $C$. Say $\left< b \right> = \left< b_1 \right>$ without loss of generality. Then $b=ub_1$ for some unit $u\in R$. Then by letting $L=\sum^{r+s}_{i=1}z_i\log\left( c_i \right)$. Then
+            \begin{equation*}
+                f\left( b \right) f=\left( ub_1 \right) = z\phi\left( ub_1 \right) = f\left( u \right)+f\left( b_1 \right).
+            \end{equation*}
+            Then
+            \begin{equation*}
+                \left| f\left( u \right)-L \right| \leq \underbrace{\left| f\left( b_1 \right) \right| + \left( \sum^{r}_{i=1}\left| z_i \right|+\frac{1}{2}\sum^{s}_{i=r+1}\left| z_i \right| \right)\log\left( C \right)}_{=B}.
+            \end{equation*}
+            Note that $B$ does not depend on $c_1,\ldots,c_{r+s}$.
+        \end{claim}
+    \end{proof}
+
+    \begin{boxyproof}{Proof of Dirichlet's Unit Theorem}
+        Say
+        \begin{equation*}
+            \phi\left( R^{\times} \right) = \spn_{\Z}\left\lbrace u_1,\ldots,u_k \right\rbrace.
+        \end{equation*}
+        Then
+        \begin{equation*}
+            H = \spn_{\R}\left( \phi\left( R^{\times} \right) \right) = \spn_{\R}\left\lbrace u_1,\ldots,u_k \right\rbrace,
+        \end{equation*}
+        so that $u_1,\ldots,u_k$ is a basis for $H$. Hence $\dim\left( H \right) = k = r+s-1$. Hence
+        \begin{equation*}
+            \phi\left( R^{\times} \right) \iso\Z^{r+s-1}.
+        \end{equation*}
+        Hence there is an isomorphism $\rho: R^{\times} /\ker\left( \phi \right)\to\Z^{r+s-1}$. For $i\in\left\lbrace 1,\ldots,r+s-1 \right\rbrace$, let $e_i=\rho\left( \epsilon_i\ker\left( \phi \right) \right)$. For $u\in R^\times$<
+        \begin{equation*}
+            \rho\left( u\ker\left( \phi \right) \right) = \sum^{m}_{i=1} n_ie_i \implies u\ker\left( \phi \right) = \epsilon_1^{n_1}\times\epsilon_m^{n_m}\ker\left( \phi \right),
+        \end{equation*}
+        so there exists $\zeta\in\ker\left( \phi \right)$ such that
+        \begin{equation*}
+            u = \zeta\epsilon_1^{n_1}\cdots\epsilon_m^{n_m}.
+        \end{equation*}
+
+        \begin{claim}
+            \textit{$\epsilon_1,\ldots,\epsilon_m$ are multiplicatively independent.}
+
+            Left as an exercise.
+        \end{claim}
+    \end{boxyproof}
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+\end{document}
